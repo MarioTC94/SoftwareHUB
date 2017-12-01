@@ -76,7 +76,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Comentarios exist
 		public function Exists(Comentarios $oComentarios){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Comentarios WHERE PK_IDComentarios = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Comentarios WHERE PK_IDComentarios = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oComentarios->getPK_IDComentarios());
 			
@@ -84,7 +84,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDComentarios);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

@@ -11,13 +11,14 @@ namespace Asphyo\src\Model\DAO{
 
 		//Add a Proveedor
 		public function Add(Proveedor $oProveedor){
-			$STMT = parent::PREPARE('INSERT INTO Proveedor(Activo) VALUES (?);');
+			$STMT = parent::PREPARE('INSERT INTO Proveedor(Activo, PK_IDCorreo) VALUES (?, ?);');
 			
-			$Params = parent::TypeParam($oProveedor->getActivo());
+			$Params = parent::TypeParam($oProveedor->getActivo()) . parent::TypeParam($oProveedor->getPK_IDCorreo());
 			
 			$Activo = $oProveedor->getActivo();
+			$PK_IDCorreo = $oProveedor->getPK_IDCorreo();
 			
-			$STMT->bind_param($Params, $Activo);
+			$STMT->bind_param($Params, $Activo,  $PK_IDCorreo);
 			
 			return parent::CMD($STMT);
 		}
@@ -70,7 +71,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Proveedor exist
 		public function Exists(Proveedor $oProveedor){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Proveedor WHERE PK_IDCorreo = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Proveedor WHERE PK_IDCorreo = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oProveedor->getPK_IDCorreo());
 			
@@ -78,7 +79,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDCorreo);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

@@ -8,15 +8,14 @@ namespace Asphyo\src\Model\Domain{
 	class Usuario{
 		//Attributes
 		private $NombreUsuario;
+		private $Nombre;
 		private $Apellido;
 		private $FechaNacimiento;
 		private $PK_Correo;
 		private $Contrasena;
 		private $Salt;
 		private $Activo;
-		private $ImagenUsuario;
 		private $IDRol;
-		private $Bitacora;
 		
 
 		//Constructors
@@ -26,18 +25,17 @@ namespace Asphyo\src\Model\Domain{
 		}
 
 
-		public static function createUsuario($NombreUsuario, $Apellido, $FechaNacimiento, $PK_Correo, $Contrasena, $Salt, $Activo, $ImagenUsuario, $IDRol, $Bitacora){
+		public static function createUsuario($NombreUsuario, $Nombre, $Apellido, $FechaNacimiento, $PK_Correo, $Contrasena, $Salt, $Activo, $IDRol){
 			$instance = new self();
             $instance->NombreUsuario=$NombreUsuario;
+			$instance->Nombre=$Nombre;
 			$instance->Apellido=$Apellido;
 			$instance->FechaNacimiento=$FechaNacimiento;
 			$instance->PK_Correo=$PK_Correo;
 			$instance->Contrasena=$Contrasena;
 			$instance->Salt=$Salt;
 			$instance->Activo=$Activo;
-			$instance->ImagenUsuario=$ImagenUsuario;
 			$instance->IDRol=$IDRol;
-			$instance->Bitacora=$Bitacora;
 			
 			return $instance;
 		}
@@ -49,6 +47,15 @@ namespace Asphyo\src\Model\Domain{
 
 		public function setNombreUsuario($NombreUsuario) {
 			$this->NombreUsuario = $NombreUsuario;
+		}
+
+					
+		public function getNombre(){
+			return $this->Nombre;
+		}
+
+		public function setNombre($Nombre) {
+			$this->Nombre = $Nombre;
 		}
 
 					
@@ -106,15 +113,6 @@ namespace Asphyo\src\Model\Domain{
 		}
 
 					
-		public function getImagenUsuario(){
-			return $this->ImagenUsuario;
-		}
-
-		public function setImagenUsuario($ImagenUsuario) {
-			$this->ImagenUsuario = $ImagenUsuario;
-		}
-
-					
 		public function getIDRol(){
 			return $this->IDRol;
 		}
@@ -124,28 +122,18 @@ namespace Asphyo\src\Model\Domain{
 		}
 
 					
-		public function getBitacora(){
-			return $this->Bitacora;
-		}
-
-		public function setBitacora($Bitacora) {
-			$this->Bitacora = $Bitacora;
-		}
-
-					
 
 		public function toJSON(){
 			$arrayUsuario = array();
 			$arrayUsuario[NombreUsuario] = $this->FK_[NombreUsuario];
+			$arrayUsuario[Nombre] = $this->FK_[Nombre];
 			$arrayUsuario[Apellido] = $this->FK_[Apellido];
 			$arrayUsuario[FechaNacimiento] = $this->FK_[FechaNacimiento];
 			$arrayUsuario[PK_Correo] = $this->FK_[PK_Correo];
 			$arrayUsuario[Contrasena] = $this->FK_[Contrasena];
 			$arrayUsuario[Salt] = $this->FK_[Salt];
 			$arrayUsuario[Activo] = $this->FK_[Activo];
-			$arrayUsuario[ImagenUsuario] = $this->FK_[ImagenUsuario];
 			$arrayUsuario[IDRol] = $this->FK_[IDRol];
-			$arrayUsuario[Bitacora] = $this->FK_[Bitacora];
 			
 			return json_encode($arrayUsuario);
 		}

@@ -82,7 +82,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Incidente exist
 		public function Exists(Incidente $oIncidente){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Incidente WHERE PK_IDIncidente = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Incidente WHERE PK_IDIncidente = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oIncidente->getPK_IDIncidente());
 			
@@ -90,7 +90,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDIncidente);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

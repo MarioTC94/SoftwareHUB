@@ -8,7 +8,7 @@
   <div class="modal-body">
         <div class="container-fluid row">
             <div class="col-md-12">
-                <form method="POST" action="<?php $this->Url->toAction("Login", "Validate") ?>" class="form-horizontal" >
+                <form method="POST" action="<?= $Url::toAction("Home", "Index") ?>" class="form-horizontal" >
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <input type="text" name="user" class="form-control user" id="txtUsuario"  placeholder="Nombre de Usuario o Correo"/>

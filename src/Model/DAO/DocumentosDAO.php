@@ -76,7 +76,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Documentos exist
 		public function Exists(Documentos $oDocumentos){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Documentos WHERE PK_IDDocumentos = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Documentos WHERE PK_IDDocumentos = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oDocumentos->getPK_IDDocumentos());
 			
@@ -84,7 +84,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDDocumentos);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
    <html lang="en">
    <head>
       <meta charset="UTF-8">
@@ -12,7 +12,7 @@
    <body>
    <header>
          <div class="row">
-            <?php include_once('Template/navmain.php') ?>
+            <?php include_once('Template/nav.php') ?>
          </div>
       </header>
       <div class="row">

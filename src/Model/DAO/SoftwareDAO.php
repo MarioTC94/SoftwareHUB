@@ -76,7 +76,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Software exist
 		public function Exists(Software $oSoftware){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Software WHERE PK_IDSoftware = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Software WHERE PK_IDSoftware = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oSoftware->getPK_IDSoftware());
 			
@@ -84,7 +84,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDSoftware);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

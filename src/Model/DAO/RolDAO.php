@@ -72,7 +72,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Rol exist
 		public function Exists(Rol $oRol){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Rol WHERE PK_IDROL = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Rol WHERE PK_IDROL = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oRol->getPK_IDROL());
 			
@@ -80,7 +80,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDROL);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }

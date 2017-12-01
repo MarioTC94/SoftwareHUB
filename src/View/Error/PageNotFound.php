@@ -28,7 +28,7 @@
     </header>
     <div class="paralax">
         <div class="opacity">
-        <h2>Error <span>Página no encontrada</span></h2>
+        <h2>Error404 <span>Página no encontrada</span></h2>
         </div>
     </div>
     <footer>

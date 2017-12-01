@@ -11,13 +11,14 @@ namespace Asphyo\src\Model\DAO{
 
 		//Add a Cliente
 		public function Add(Cliente $oCliente){
-			$STMT = parent::PREPARE('INSERT INTO Cliente(Activo) VALUES (?);');
+			$STMT = parent::PREPARE('INSERT INTO Cliente(Activo, PK_IDCorreo) VALUES (?, ?);');
 			
-			$Params = parent::TypeParam($oCliente->getActivo());
+			$Params = parent::TypeParam($oCliente->getActivo()) . parent::TypeParam($oCliente->getPK_IDCorreo());
 			
 			$Activo = $oCliente->getActivo();
+			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
 			
-			$STMT->bind_param($Params, $Activo);
+			$STMT->bind_param($Params, $Activo,  $PK_IDCorreo);
 			
 			return parent::CMD($STMT);
 		}
@@ -70,7 +71,7 @@ namespace Asphyo\src\Model\DAO{
 
 		//Varify if a Cliente exist
 		public function Exists(Cliente $oCliente){
-			$STMT = parent::PREPARE('SELECT EXISTS(SELECT 1 FROM Cliente WHERE PK_IDCorreo = ? LIMIT 1);');
+			$STMT = parent::PREPARE('SELECT 1 FROM Cliente WHERE PK_IDCorreo = ? LIMIT 1;');
 			
 			$Params = parent::TypeParam($oCliente->getPK_IDCorreo());
 			
@@ -78,7 +79,7 @@ namespace Asphyo\src\Model\DAO{
 			
 			$STMT->bind_param($Params, $PK_IDCorreo);
 			
-			return parent::FirstOrDefault($STMT)->Count() > 0;
+			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 	}
 }
