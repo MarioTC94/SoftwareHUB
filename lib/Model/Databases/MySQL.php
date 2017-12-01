@@ -103,7 +103,7 @@ class MySQL
         if ($STMT->execute()) {
             return true;
         } else {
-            return false;
+            throw new \Exception(self::$connection->error, 1);
         }
     }
 

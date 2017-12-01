@@ -1,12 +1,12 @@
 <?php
-namespace Asphyo\src\Model\DAO{
+namespace src\Model\DAO{
 		/**
 		* This class contain all methods to interact with the data base
 		* @author lHersey
-		* @GitHub http://Github.com/lHersey
+		* @GitHub http://github.com/lHersey
 		*/
-	use Asphyo\bin\Model\Databases\MySQL;
-	use Asphyo\src\Model\Domain\Rol;
+	use lib\Model\Databases\MySQL;
+	use src\Model\Domain\Rol;
 	class RolDAO extends MySQL{
 
 		//Add a Rol

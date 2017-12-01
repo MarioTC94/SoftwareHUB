@@ -1,9 +1,9 @@
 <?php
-namespace Asphyo\src\Model\Domain{
+namespace src\Model\Domain{
 		/**
 		* This class contain all attributes for the model of the table Usuario
 		* @author lHersey
-		* @GitHub http://Github.com/lHersey
+		* @GitHub http://github.com/lHersey
 		*/
 	class Usuario{
 		//Attributes
