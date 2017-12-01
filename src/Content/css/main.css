@@ -1,0 +1,228 @@
+﻿html{
+    height: 100%;
+}
+
+.panel-body{
+    color: #000;
+}
+
+.navbar-brand{
+    float: none;
+}
+
+.navbar-header{
+    margin-top: 0.5rem;
+}
+
+.social-buttons{
+    margin-top: 0.8em;
+}
+
+
+.video{
+    display: block;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+.modal{
+    color: #2f3337;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    color: #f5f8fa;
+    background-color: #2f3337;
+    height: 100%;
+}
+
+    body a {
+        color: #f5f8fa;
+    }
+
+header .navbar {
+    margin-bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    border-bottom: 2px solid #000;
+    box-shadow: rgba(0,0,0,0.4) 0px 3px;
+}
+
+    header .navbar .contenedor-navbar .navbar-header .navbar-brand {
+        margin-left: -15px;
+    }
+
+        header .navbar .contenedor-navbar .navbar-header .navbar-brand img {
+            display: inline-block;
+        }
+
+        header .navbar .contenedor-navbar .navbar-header .navbar-brand h1 {
+            display: inline-block;
+            font-size: 20px;
+            color: #239fed;
+        }
+
+    header .navbar .contenedor-navbar .navbar-header .navbar-toggle {
+        margin-top: 22px;
+    }
+
+    header .navbar .contenedor-navbar .navbar-header .navbar-brand h1 span {
+        color: #f5f8fa
+    }
+
+header .row {
+    margin: 0;
+}
+
+header .navbar-collapse .nav {
+    float: right;
+    padding: 12px 0;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    border-color: black;
+}
+
+
+.paralax{
+    background-image: url("../Resources/img/WorkT1.jpeg");
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    z-index: 1;
+}
+
+ .paralax .opacity{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.45);
+    }
+
+ .paralax .opacity h2{
+            top: 50%;
+            position: absolute;
+            width: 100%;
+            margin-left: 10%;
+            color: #fff;
+            font-size: 5rem;
+            font-style: oblique;
+            font-weight: 5px;
+            line-height: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+            .paralax .opacity h2 span{
+            color: #239fed;
+        }
+       
+footer {
+    padding-top: 20px;
+    border-top: 1px solid #2f3337;
+    background: #1c2125;
+}
+
+    footer a, footer p {
+        display: inline-block;
+        margin: 0;
+    }
+
+    footer .social a {
+        margin-left: 20px;
+        transition: all .3s;
+    }
+
+     footer .social a span {
+            font-size: 30px;
+        }
+
+    footer .social a:hover {
+            text-decoration: none;
+            transform: scale(1.3, 1.3);
+        }
+
+    footer .copy {
+        margin-top: 14px;
+        height: 250px;
+    }
+
+    footer .copy h3 {
+            font-weight: 300;
+        }
+      
+     footer .copy p {
+            display: block;
+            font-size: 14px;
+        }
+    
+
+
+
+.navbar-default {
+    background: #1b1f23;
+    border-color: #1b1f23;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #f5f8fa;
+    font-size: 15px;
+}
+
+    .navbar-default .navbar-nav > li > a:focus,
+    .navbar-default .navbar-nav > li > a:hover {
+        color: #239fed;
+    }
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
+    color: #f5f8fa;
+    background-color: #1b1f23;
+}
+
+.dropdown-menu {
+    background: #1b1f23;
+}
+
+    .dropdown-menu > li > a {
+        color: #f5f8fa;
+    }
+
+        .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+            color: #f5f8fa;
+            background-color: #239fed;
+        }
+
+@media only screen and (max-device-width: 1024px) {
+    .paralax {
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 767px){
+    .navbar-nav {
+        float: left !important;
+        margin: 0;
+    }
+}
+
+.carousel .item {
+    height: 600px;
+  }
+  
+  .item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 600px;
+  }
+
+  

@@ -1,0 +1,23 @@
+RewriteEngine On
+
+<FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$">
+    ## Apache 2.2
+    Order allow,deny
+    Deny from all
+    Satisfy All
+
+    # Apache 2.4
+    Require all denied
+</FilesMatch>
+
+RewriteCond %{REQUEST_URI} ^.+$
+RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g|png|js|css|swf|php|ico|txt|pdf|xml)$ [OR]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -l
+RewriteRule ^ - [L]
+
+RewriteRule  "^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$" "?controller=$1&action=$2&id=$3&%{QUERY_STRING}"  [NC,L]
+RewriteRule  "^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$" "?controller=$1&action=$2&%{QUERY_STRING}"  [NC,L]
+RewriteRule  "^([A-Za-z0-9-]+)/?$" "?controller=$1&action=Index&%{QUERY_STRING}"  [NC,L]
+RewriteRule ^(?:[^/]*/)*([^/.]+\.(?:jpe?g|gif|bmp|png|tiff|css|js))$ src/View/Content/App/css/$1 [R=301,L,NC]
