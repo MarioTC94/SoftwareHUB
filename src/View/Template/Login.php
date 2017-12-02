@@ -3,25 +3,26 @@
 <div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h2 class="modal-title" id="myModalLabel">Inicia sesion</h2>
+    <h2 class="modal-title" id="myModalLabel">Inicia Sesión</h2>
   </div>
   <div class="modal-body">
         <div class="container-fluid row">
             <div class="col-md-12">
-                <form method="POST" action="<?= $Url::toAction("Home", "Index") ?>" class="form-horizontal" >
+                <form method="POST" id="FormLogin" class="form-horizontal" >
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" name="user" class="form-control user" id="txtUsuario"  placeholder="Nombre de Usuario o Correo"/>
+                            <input type="text" name="PK_Correo" class="form-control user" id="txtUsuario"  placeholder="Correo Electrónico.."/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="password" name="pass" class="form-control password" id="txtContraseña"  placeholder="Contraseña"/>
+                            <input type="password" name="Contraseña" class="form-control password" id="txtContraseña"  placeholder="Contraseña.."/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-12 contenedor-boton">
-                            <button type="submit" class="btn btn-primary" id="btnSubmit" >Iniciar sesion</button>
+                    <div class="col-md-9" id="ErrorLogin"></div>
+                        <div class="col-sm-3 contenedor-boton">
+                            <button type="submit" class="btn btn-primary" id="btnSubmit" >Iniciar Sesión</button>
                         </div>
                     </div>
                 </form>

@@ -7,9 +7,9 @@ $(document).ready(function () {
             url: '/SoftwareHUB/Home/Registro/', //Metodo del controlador de Asphyo donde van a llegar los datos
             type: 'POST',
             data: {
-                DatosLogin: DataLogin
+                DatosRegistro: Data
             },
-            datatype: 'json',
+            dataType: 'json',
             success: function (Respuesta) {
                 switch (Respuesta.Codigo) {
                     case 1:
@@ -17,7 +17,7 @@ $(document).ready(function () {
                         break;
                     default:
                         $('#Error').html("");
-                        $('#Error').append('<div class="alert alert-danger"><strong>Error!</strong>' + Respuesta.Mensaje + '</div>');
+                        $('#Error').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
                         break;
                 }
             },
@@ -35,7 +35,7 @@ $(document).ready(function () {
             url: '/SoftwareHUB/Home/Login/', //Metodo del controlador de Asphyo donde van a llegar los datos
             type: 'POST',
             data: {
-                DatosRegistro: DataRegister
+                DatosLogin: Data
             },
             dataType: 'json',
             success: function (Respuesta) {
@@ -44,8 +44,8 @@ $(document).ready(function () {
                         window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
                         break;
                     default:
-                        $('#Error').html("");
-                        $('#Error').append('<div class="alert alert-danger"><strong>Error!</strong></div>');
+                        $('#ErrorLogin').html("");
+                        $('#ErrorLogin').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
                         break;
                 }
             },

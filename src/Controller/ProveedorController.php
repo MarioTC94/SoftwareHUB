@@ -9,12 +9,7 @@ class ProveedorController extends BaseController
 {
    public function Index()
    {
-      \session_start();
-      if (isset($_SESSION['UsuarioLogueado'])) {
-         parent::View();
-      } else {
-         parent::toView('Home', 'Index');
-      }
+      if (self::validate()) parent::View();
    }
 
    public function LogOut()
@@ -22,6 +17,19 @@ class ProveedorController extends BaseController
       \session_start();
       \session_destroy();
       parent::toView("Home", "Index");
+   }
+
+   public function validate()
+   {
+      \session_start();
+      if (isset($_SESSION['UsuarioLogueado'])) {
+         if ($_SESSION['UsuarioLogueado']['Rol'] == 'Proveedor') {
+            return true;
+         } else {
+            parent::toView('Cliente', 'Index');
+         }
+      } else
+         parent::toView('Home', 'Index');
    }
 }
 ?>

@@ -117,9 +117,9 @@ namespace src\Model\DAO {
 			return parent::FirstOrDefault($STMT)['Salt'];
 		}
 
-		public function Exists(Usuario $oUsuario)
+		public function Login(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('SELECT 1 FROM Usuario WHERE PK_Correo = ? AND Contrasena = ? LIMIT 1;');
+			$STMT = parent::PREPARE('SELECT a.Nombre Nombre, a.PK_Correo PK_Correo, b.DescripcionRol DescripcionRol FROM Usuario a JOIN Rol b ON a.IDRol = b.PK_IDROL  WHERE PK_Correo = ? AND Contrasena = ? LIMIT 1;');
 
 			$Params = parent::TypeParam($oUsuario->getPK_Correo()) . parent::TypeParam($oUsuario->getContrasena());
 
@@ -127,9 +127,10 @@ namespace src\Model\DAO {
 
 			$Contraseña = $oUsuario->getContrasena();
 
-			$STMT->bind_param($Params, $PK_Correo);
+			$STMT->bind_param($Params, $PK_Correo, $Contraseña);
 
-			return Count(parent::FirstOrDefault($STMT)) > 0;
+			return parent::FirstOrDefault($STMT);
+
 		}
 	}
 }

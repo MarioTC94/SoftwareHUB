@@ -12,7 +12,7 @@
    <body>
    <header>
          <div class="row">
-            <?php include_once('Template/navProveedor.php') ?>
+            <?php include_once(HTML_DIR . 'Template/navProveedor.php') ?>
          </div>
       </header>
       <div class="row">

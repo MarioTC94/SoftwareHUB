@@ -14,12 +14,11 @@
    <div class="collapse navbar-collapse" id="navbar1">
       <ul class="nav navbar-nav">
          <li class=""><a href="#">Ver Incidentes</a></li>
-         <li class=""><a>Crear Producto Software</a></li>
+         <li class=""><a>Crear Incidentes</a></li>
          <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Servicios en línea <span class="caret"></span></a>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <?= $_SESSION['UsuarioLogueado']['Nombre'] ?> <span class="caret"></span></a>
                <ul class="dropdown-menu">
-                 <li><a id="btnLogin" href="">Mi Perfil</a></li>
-                 <li><a id="btnLogout" href="<?= $Url::toAction('Cliente', 'LogOut'); ?>">Cerrar Sesión</a></li>
+                  <li><a id="btnLogout" href="<?= $Url::toAction('Cliente', 'LogOut'); ?>">Cerrar Sesión</a></li>
                </ul>
          </li>
     </ul>

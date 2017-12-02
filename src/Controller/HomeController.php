@@ -6,13 +6,16 @@ use src\Model\DAO\UsuarioDAO;
 use src\Controller\Validaciones;
 use src\Model\Domain\Usuario;
 use src\Model\DAO\RolDAO;
+use src\Model\Domain\Rol;
 
 class HomeController extends BaseController
 {
     public function Index()
     {
-        $rol = new RolDAO();
-        parent::View($rol->SelectAll());
+        if (self::validate()) {
+            $rol = new RolDAO();
+            parent::View($rol->SelectAll());
+        }
     }
 
     public function Registro()
@@ -20,8 +23,7 @@ class HomeController extends BaseController
             
         //Registro Cliente o Proveedor
         if (!isset($_POST["DatosRegistro"])) {
-            $Respuesta = array('Codigo' => '5', 'Mensaje' => 'Error, No se completo su solicitud');
-            echo \json_encode($Respuesta);
+            parent::toView('Error', 'PageNotFound');
         }
 
         $DataRegister = \json_decode($_POST["DatosRegistro"], true);
@@ -38,20 +40,24 @@ class HomeController extends BaseController
         $oUsuario->setContrasena(\hash('sha256', $DataRegister['Contraseña'] . $oUsuario->getSalt()));
 
         if ($oUsuarioDao->Exists($oUsuario)) {
-            $Respuesta = array('Codigo' => '3', 'Mensaje' => 'Error, El Usuario ya esta registrado');
+            $Respuesta = array('Codigo' => 3, 'Mensaje' => 'Error, El Usuario ya esta registrado');
             echo \json_encode($Respuesta);
+            exit();
         }
 
         if ($oUsuarioDao->Add($oUsuario)) {
             $oRolDAO = new RolDAO();
-            $oROl = $oRolDAO->SelectByPrimaryKey($oUsuario->getIDRol())['DescripcionRol'];
-            $Respuesta = array('Codigo' => '1', 'Mensaje' => 'Exito', 'Rol' => $oRol);
+            $oRol = new Rol();
+            $oRol->setPK_IDROL($oUsuario->getIDRol());
+            $oDescripcionRol = $oRolDAO->SelectByPrimaryKey($oRol)['DescripcionRol'];
+            $Respuesta = array('Codigo' => 1, 'Mensaje' => 'Exito', 'Rol' => $oDescripcionRol);
 
             \session_start();
-            $_SESSION['UsuarioLogueado'] = array('Nombre' => $oUsuario->getNombre(), 'PK_Correo' => $oUsuario->getPK_Correo(), 'Rol' => $oROl);
+            $_SESSION['UsuarioLogueado'] = array('Nombre' => $oUsuario->getNombre(), 'PK_Correo' => $oUsuario->getPK_Correo(), 'Rol' => $oDescripcionRol);
+
             echo \json_encode($Respuesta);
         } else {
-            $Respuesta = array('Codigo' => '4', 'Mensaje' => 'Error, No se pudo registrar');
+            $Respuesta = array('Codigo' => 4, 'Mensaje' => 'Error, No se pudo registrar');
             echo \json_encode($Respuesta);
         }
     }
@@ -73,17 +79,32 @@ class HomeController extends BaseController
         $oUsuario->setPK_Correo($DataLogin["PK_Correo"]);
 
         if (!$oUsuarioDAO->Exists($oUsuario)) {
-            $Respuesta = array('Codigo' => '3', 'Mensaje' => 'Error, No se completó su solicitud');
+            $Respuesta = array('Codigo' => 3, 'Mensaje' => 'Error, No se completó su solicitud');
             echo \json_encode($Respuesta);
+        } else {
+
+            $Salt = $oUsuarioDAO->SelectSaltByPrimaryKey($oUsuario);
+            $oUsuario->setContrasena(\hash('sha256', $DataLogin['Contraseña'] . $Salt));
+            $Logued = $oUsuarioDAO->Login($oUsuario);
+            if (Count($Logued) <> 0) {
+                $Respuesta = array('Codigo' => 1, 'Mensaje' => 'Exito', 'Rol' => $Logued['DescripcionRol']);
+                \session_start();
+                $_SESSION['UsuarioLogueado'] = array('Nombre' => $Logued['Nombre'], 'PK_Correo' => $Logued['PK_Correo'], 'Rol' => $Logued['DescripcionRol']);
+                echo \json_encode($Respuesta);
+            } else {
+                echo \json_encode(array('Codigo' => 3, 'Mensaje' => 'Error, Correo o Contraseña Incorrectos'));
+            }
         }
+    }
 
-        $Salt = $oUsuarioDAO->SelectSaltByPrimaryKey($oUsuario);
-        $oUsuario->setContrasena(\hash('sha256', $DataLogin['Contraseña'] . $Salt));
-
-        if ($oClienteLoginDao->Add($oClienteLogin)) {
-            $Respuesta = array('Codigo' => '1', 'Mensaje' => 'Exito');
-            $_SESSION['UsuarioLogueado'] = array('Nombre' => $oUsuario->getNombre(), 'PK_Correo' => $oUsuario->getPK_Correo(), 'Rol' => $oROl);
-            echo \json_encode($Respuesta);
+    public function validate()
+    {
+        \session_start();
+        if (isset($_SESSION['UsuarioLogueado'])) {
+            parent::toView($_SESSION['UsuarioLogueado']['Rol'], '');
+        } else {
+            return true;
         }
     }
 }
+  

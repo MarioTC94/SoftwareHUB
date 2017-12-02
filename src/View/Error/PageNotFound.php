@@ -10,8 +10,8 @@
 	<?= $Html::css(['bootstrap.min', 'main', 'preload']); ?>
 </head>
 <body>
-    <?php include_once('Modals/Login.php'); ?>
-    <?php include_once('Modals/Register.php'); ?>
+    <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
+    <?php include_once(HTML_DIR . 'Template/Register.php'); ?>
     <div class="preload">
         <div class="logo">
             <h2>Cargando... <span>Espere</span></h2>
@@ -23,7 +23,7 @@
     </div>
     <header>
         <div class="row">
-                <?php include_once('Template/nav.php') ?>
+                <?php include_once(HTML_DIR . 'Template/nav.php') ?>
         </div>
     </header>
     <div class="paralax">
