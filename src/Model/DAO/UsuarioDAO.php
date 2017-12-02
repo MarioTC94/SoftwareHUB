@@ -116,6 +116,21 @@ namespace src\Model\DAO {
 			$STMT->bind_param($Params, $PK_Correo);
 			return parent::FirstOrDefault($STMT)['Salt'];
 		}
+
+		public function Exists(Usuario $oUsuario)
+		{
+			$STMT = parent::PREPARE('SELECT 1 FROM Usuario WHERE PK_Correo = ? AND Contrasena = ? LIMIT 1;');
+
+			$Params = parent::TypeParam($oUsuario->getPK_Correo()) . parent::TypeParam($oUsuario->getContrasena());
+
+			$PK_Correo = $oUsuario->getPK_Correo();
+
+			$Contraseña = $oUsuario->getContrasena();
+
+			$STMT->bind_param($Params, $PK_Correo);
+
+			return Count(parent::FirstOrDefault($STMT)) > 0;
+		}
 	}
 }
 ?>

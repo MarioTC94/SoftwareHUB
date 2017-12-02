@@ -17,7 +17,7 @@ $(document).ready(function () {
                         break;
                     default:
                         $('#Error').html("");
-                        $('#Error').append('<div class="alert alert-danger"><strong>Error!</strong></div>');
+                        $('#Error').append('<div class="alert alert-danger"><strong>Error!</strong>' + Respuesta.Mensaje + '</div>');
                         break;
                 }
             },
@@ -37,8 +37,8 @@ $(document).ready(function () {
             data: {
                 DatosRegistro: DataRegister
             },
-            datatype: 'json',
-            uccess: function (Respuesta) {
+            dataType: 'json',
+            success: function (Respuesta) {
                 switch (Respuesta.Codigo) {
                     case 1:
                         window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
@@ -53,6 +53,7 @@ $(document).ready(function () {
                 console.log(e);
             }
         });
+
     });
 
     //Salir del Boton salir del modal Registro

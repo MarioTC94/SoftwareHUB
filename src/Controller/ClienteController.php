@@ -9,7 +9,14 @@ class ClienteController extends BaseController
 {
       public function Index()
       {
-            parent::View();
+            \session_start();
+            if (isset($_SESSION['UsuarioLogueado'])) {
+                  parent::View();
+            } else {
+                  parent::toView('Home', 'Index');
+            }
+
+
       }
       public function LogOut()
       {

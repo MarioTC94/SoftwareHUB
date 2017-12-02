@@ -46,6 +46,9 @@ class HomeController extends BaseController
             $oRolDAO = new RolDAO();
             $oROl = $oRolDAO->SelectByPrimaryKey($oUsuario->getIDRol())['DescripcionRol'];
             $Respuesta = array('Codigo' => '1', 'Mensaje' => 'Exito', 'Rol' => $oRol);
+
+            \session_start();
+            $_SESSION['UsuarioLogueado'] = array('Nombre' => $oUsuario->getNombre(), 'PK_Correo' => $oUsuario->getPK_Correo(), 'Rol' => $oROl);
             echo \json_encode($Respuesta);
         } else {
             $Respuesta = array('Codigo' => '4', 'Mensaje' => 'Error, No se pudo registrar');
@@ -79,6 +82,7 @@ class HomeController extends BaseController
 
         if ($oClienteLoginDao->Add($oClienteLogin)) {
             $Respuesta = array('Codigo' => '1', 'Mensaje' => 'Exito');
+            $_SESSION['UsuarioLogueado'] = array('Nombre' => $oUsuario->getNombre(), 'PK_Correo' => $oUsuario->getPK_Correo(), 'Rol' => $oROl);
             echo \json_encode($Respuesta);
         }
     }
