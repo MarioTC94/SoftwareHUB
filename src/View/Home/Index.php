@@ -85,6 +85,6 @@
               
             </div>
         </footer>   
-        <?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'scripts', 'preload']); ?>
+        <?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'ajax', 'preload']); ?>
     </body>
 </html>

@@ -22,14 +22,17 @@
                                 <input type="text" name="NombreUsuario" class="form-control" id="txtNombreUsuario"  placeholder="Nombre Usuario.."/>
                             </div>
                             <div class="col-sm-6">
-                                <input type="date" name="FechaNacimineto" class="form-control" id="txtFechaNac"/>
+                                <input type="date" name="FechaNacimiento" class="form-control" id="txtFechaNac"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <select name="IDRol" class="form-control" id="CBRol">
-                             <option value="1">Administrador</option>
-                             <option value="2">Cliente</option>
+                                <?php 
+                                foreach ($model as $value) {
+                                    echo '<option value="' . $value['PK_IDROL'] . '">' . $value['DescripcionRol'] . '</option>';
+                                }
+                                ?>
                             </select>
                             </div>
                             <div class="col-sm-6">
@@ -48,9 +51,13 @@
                 </div>
             </div>
       </div>
-      <div id="FooterRegister" class="modal-footer">
-        <button class="btn btn-default" id="btnSalir">¡Salir!</button>
-        <button type="submit" class="btn btn-primary" id="btnSubmitRegister" form="FormRegister" >¡Registrarse!</button>
+      <div id="FooterRegister" class="modal-footer row">
+          <div class="col-md-9" id="Error"></div>
+          <div class="col-md-3">
+            <button class="btn btn-default" id="btnSalir">¡Salir!</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmitRegister" form="FormRegister" >¡Registrarse!</button>                 
+          </div>
+       
       </div>
     </div>
   </div>

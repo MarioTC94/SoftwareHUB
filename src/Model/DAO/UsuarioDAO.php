@@ -103,6 +103,19 @@ namespace src\Model\DAO {
 
 			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
+
+		public function SelectSaltByPrimaryKey(Usuario $oUsuario)
+		{
+			$STMT = parent::PREPARE('SELECT Salt FROM Usuario WHERE PK_Correo = ?;');
+
+			$Params = parent::TypeParam($oUsuario->getPK_Correo());
+
+			$PK_Correo = $oUsuario->getPK_Correo();
+
+
+			$STMT->bind_param($Params, $PK_Correo);
+			return parent::FirstOrDefault($STMT)['Salt'];
+		}
 	}
 }
 ?>

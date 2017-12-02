@@ -8,15 +8,15 @@
   <div class="modal-body">
         <div class="container-fluid row">
             <div class="col-md-12">
-                <form method="POST" action="<?= $Url::toAction("Login", "Validate") ?>" class="form-horizontal" >
+                <form method="POST" id="FormLogin" class="form-horizontal" >
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" name="Correo Electrónico" class="form-control user" id="txtUsuario"  placeholder="Correo Electrónico.."/>
+                            <input type="text" name="PK_Correo" class="form-control user" id="txtUsuario"  placeholder="Correo Electrónico.."/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="password" name="pass" class="form-control password" id="txtContraseña"  placeholder="Contraseña.."/>
+                            <input type="password" name="Contraseña" class="form-control password" id="txtContraseña"  placeholder="Contraseña.."/>
                         </div>
                     </div>
                     <div class="form-group row">
