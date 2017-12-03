@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
-    $('#FormRegister').submit(function (e) {
+    $('#FormRegisterCliente').submit(function (e) {
         e.preventDefault();
-        var Data = JSON.stringify(getFormData($('#FormRegister')));
+        var Data = JSON.stringify(getFormData($('#FormRegisterCliente')));
         $.ajax({
-            url: '/SoftwareHUB/Home/Registro/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            url: '/SoftwareHUB/Home/RegistroCliente/', //Metodo del controlador de Asphyo donde van a llegar los datos
             type: 'POST',
             data: {
                 DatosRegistro: Data
@@ -16,8 +16,8 @@ $(document).ready(function () {
                         window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
                         break;
                     default:
-                        $('#Error').html("");
-                        $('#Error').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#ErrorCliente').html("");
+                        $('#ErrorCliente').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
                         break;
                 }
             },
@@ -27,7 +27,34 @@ $(document).ready(function () {
         });
     });
 
+    $('#FormRegisterProveedor').submit(function (e) {
+        e.preventDefault();
+        var Data = JSON.stringify(getFormData($('#FormRegisterProveedor')));
+        $.ajax({
+            url: '/SoftwareHUB/Home/RegistroProveedor/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            type: 'POST',
+            data: {
+                DatosRegistro: Data
+            },
+            dataType: 'json',
+            success: function (Respuesta) {
+                switch (Respuesta.Codigo) {
+                    case 1:
+                        window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
+                        break;
+                    default:
+                        $('#ErrorProveedor').html("");
+                        $('#ErrorProveedor').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        break;
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
     // Ajax para Registro y Login
+
     $('#FormLogin').submit(function (e) {
         e.preventDefault();
         var Data = JSON.stringify(getFormData($('#FormLogin')));

@@ -7,13 +7,11 @@ namespace src\Model\Domain{
 		*/
 	class Usuario{
 		//Attributes
-		private $NombreUsuario;
-		private $Nombre;
-		private $Apellido;
-		private $FechaNacimiento;
-		private $PK_Correo;
+		private $PK_IDUsuario;
+		private $Correo;
 		private $Contrasena;
 		private $Salt;
+		private $FechaRegistro;
 		private $Activo;
 		private $IDRol;
 		
@@ -25,15 +23,13 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createUsuario($NombreUsuario, $Nombre, $Apellido, $FechaNacimiento, $PK_Correo, $Contrasena, $Salt, $Activo, $IDRol){
+		public static function createUsuario($PK_IDUsuario, $Correo, $Contrasena, $Salt, $FechaRegistro, $Activo, $IDRol){
 			$instance = new self();
-            $instance->NombreUsuario=$NombreUsuario;
-			$instance->Nombre=$Nombre;
-			$instance->Apellido=$Apellido;
-			$instance->FechaNacimiento=$FechaNacimiento;
-			$instance->PK_Correo=$PK_Correo;
+            $instance->PK_IDUsuario=$PK_IDUsuario;
+			$instance->Correo=$Correo;
 			$instance->Contrasena=$Contrasena;
 			$instance->Salt=$Salt;
+			$instance->FechaRegistro=$FechaRegistro;
 			$instance->Activo=$Activo;
 			$instance->IDRol=$IDRol;
 			
@@ -41,48 +37,21 @@ namespace src\Model\Domain{
 		}
 
 		
-		public function getNombreUsuario(){
-			return $this->NombreUsuario;
+		public function getPK_IDUsuario(){
+			return $this->PK_IDUsuario;
 		}
 
-		public function setNombreUsuario($NombreUsuario) {
-			$this->NombreUsuario = $NombreUsuario;
-		}
-
-					
-		public function getNombre(){
-			return $this->Nombre;
-		}
-
-		public function setNombre($Nombre) {
-			$this->Nombre = $Nombre;
+		public function setPK_IDUsuario($PK_IDUsuario) {
+			$this->PK_IDUsuario = $PK_IDUsuario;
 		}
 
 					
-		public function getApellido(){
-			return $this->Apellido;
+		public function getCorreo(){
+			return $this->Correo;
 		}
 
-		public function setApellido($Apellido) {
-			$this->Apellido = $Apellido;
-		}
-
-					
-		public function getFechaNacimiento(){
-			return $this->FechaNacimiento;
-		}
-
-		public function setFechaNacimiento($FechaNacimiento) {
-			$this->FechaNacimiento = $FechaNacimiento;
-		}
-
-					
-		public function getPK_Correo(){
-			return $this->PK_Correo;
-		}
-
-		public function setPK_Correo($PK_Correo) {
-			$this->PK_Correo = $PK_Correo;
+		public function setCorreo($Correo) {
+			$this->Correo = $Correo;
 		}
 
 					
@@ -101,6 +70,15 @@ namespace src\Model\Domain{
 
 		public function setSalt($Salt) {
 			$this->Salt = $Salt;
+		}
+
+					
+		public function getFechaRegistro(){
+			return $this->FechaRegistro;
+		}
+
+		public function setFechaRegistro($FechaRegistro) {
+			$this->FechaRegistro = $FechaRegistro;
 		}
 
 					
@@ -125,13 +103,11 @@ namespace src\Model\Domain{
 
 		public function toJSON(){
 			$arrayUsuario = array();
-			$arrayUsuario[NombreUsuario] = $this->FK_[NombreUsuario];
-			$arrayUsuario[Nombre] = $this->FK_[Nombre];
-			$arrayUsuario[Apellido] = $this->FK_[Apellido];
-			$arrayUsuario[FechaNacimiento] = $this->FK_[FechaNacimiento];
-			$arrayUsuario[PK_Correo] = $this->FK_[PK_Correo];
+			$arrayUsuario[PK_IDUsuario] = $this->FK_[PK_IDUsuario];
+			$arrayUsuario[Correo] = $this->FK_[Correo];
 			$arrayUsuario[Contrasena] = $this->FK_[Contrasena];
 			$arrayUsuario[Salt] = $this->FK_[Salt];
+			$arrayUsuario[FechaRegistro] = $this->FK_[FechaRegistro];
 			$arrayUsuario[Activo] = $this->FK_[Activo];
 			$arrayUsuario[IDRol] = $this->FK_[IDRol];
 			

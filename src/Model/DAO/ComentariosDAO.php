@@ -11,33 +11,35 @@ namespace src\Model\DAO{
 
 		//Add a Comentarios
 		public function Add(Comentarios $oComentarios){
-			$STMT = parent::PREPARE('INSERT INTO Comentarios(DescripcionComentario, Incidente, Usuario, Activo) VALUES (?, ?, ?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Comentarios(DescripcionComentario, Incidente, Usuario, Activo, FechaComentario) VALUES (?, ?, ?, ?, ?);');
 			
-			$Params = parent::TypeParam($oComentarios->getDescripcionComentario()) . parent::TypeParam($oComentarios->getIncidente()) . parent::TypeParam($oComentarios->getUsuario()) . parent::TypeParam($oComentarios->getActivo());
+			$Params = parent::TypeParam($oComentarios->getDescripcionComentario()) . parent::TypeParam($oComentarios->getIncidente()) . parent::TypeParam($oComentarios->getUsuario()) . parent::TypeParam($oComentarios->getActivo()) . parent::TypeParam($oComentarios->getFechaComentario());
 			
 			$DescripcionComentario = $oComentarios->getDescripcionComentario();
 			$Incidente = $oComentarios->getIncidente();
 			$Usuario = $oComentarios->getUsuario();
 			$Activo = $oComentarios->getActivo();
+			$FechaComentario = $oComentarios->getFechaComentario();
 			
-			$STMT->bind_param($Params, $DescripcionComentario,  $Incidente,  $Usuario,  $Activo);
+			$STMT->bind_param($Params, $DescripcionComentario,  $Incidente,  $Usuario,  $Activo,  $FechaComentario);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Comentarios
 		public function Update(Comentarios $oComentarios){
-			$STMT = parent::PREPARE('UPDATE Comentarios SET DescripcionComentario = ?, Incidente = ?, Usuario = ?, Activo = ? WHERE PK_IDComentarios = ?;');
+			$STMT = parent::PREPARE('UPDATE Comentarios SET DescripcionComentario = ?, Incidente = ?, Usuario = ?, Activo = ?, FechaComentario = ? WHERE PK_IDComentarios = ?;');
 			
-			$Params = parent::TypeParam($oComentarios->getDescripcionComentario()) . parent::TypeParam($oComentarios->getIncidente()) . parent::TypeParam($oComentarios->getUsuario()) . parent::TypeParam($oComentarios->getActivo()) . parent::TypeParam($oComentarios->getPK_IDComentarios());
+			$Params = parent::TypeParam($oComentarios->getDescripcionComentario()) . parent::TypeParam($oComentarios->getIncidente()) . parent::TypeParam($oComentarios->getUsuario()) . parent::TypeParam($oComentarios->getActivo()) . parent::TypeParam($oComentarios->getFechaComentario()) . parent::TypeParam($oComentarios->getPK_IDComentarios());
 			
 			$DescripcionComentario = $oComentarios->getDescripcionComentario();
 			$Incidente = $oComentarios->getIncidente();
 			$Usuario = $oComentarios->getUsuario();
 			$Activo = $oComentarios->getActivo();
+			$FechaComentario = $oComentarios->getFechaComentario();
 			$PK_IDComentarios = $oComentarios->getPK_IDComentarios();
 			
-			$STMT->bind_param($Params, $DescripcionComentario,  $Incidente,  $Usuario,  $Activo,  $PK_IDComentarios);
+			$STMT->bind_param($Params, $DescripcionComentario,  $Incidente,  $Usuario,  $Activo,  $FechaComentario,  $PK_IDComentarios);
 			
 			return parent::CMD($STMT);
 		}

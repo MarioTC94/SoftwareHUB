@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="password" name="Contraseña" class="form-control password" id="txtContraseña"  placeholder="Contraseña.."/>
+                            <input type="password" name="Contrasena" class="form-control password" id="txtContraseña"  placeholder="Contraseña.."/>
                         </div>
                     </div>
                     <div class="form-group row">

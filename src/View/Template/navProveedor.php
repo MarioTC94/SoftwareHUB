@@ -14,7 +14,7 @@
    <div class="collapse navbar-collapse" id="navbar1">
       <ul class="nav navbar-nav">
          <li class=""><a href="#">Ver Incidentes</a></li>
-         <li class=""><a>Crear Producto Software</a></li>
+         <li class=""><a href="#" data-toggle="modal" data-target="#CreateSoftware">Crear Software</a></li>
          <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= $_SESSION['UsuarioLogueado']['Nombre'] ?><span class="caret"></span></a>
                <ul class="dropdown-menu">

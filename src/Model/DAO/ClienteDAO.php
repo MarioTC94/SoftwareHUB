@@ -11,54 +11,60 @@ namespace src\Model\DAO{
 
 		//Add a Cliente
 		public function Add(Cliente $oCliente){
-			$STMT = parent::PREPARE('INSERT INTO Cliente(Activo, PK_IDCorreo) VALUES (?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Cliente(Nombre, Apellido, FechaNacimiento, Activo, PK_IDCliente) VALUES (?, ?, ?, ?, ?);');
 			
-			$Params = parent::TypeParam($oCliente->getActivo()) . parent::TypeParam($oCliente->getPK_IDCorreo());
+			$Params = parent::TypeParam($oCliente->getNombre()) . parent::TypeParam($oCliente->getApellido()) . parent::TypeParam($oCliente->getFechaNacimiento()) . parent::TypeParam($oCliente->getActivo()) . parent::TypeParam($oCliente->getPK_IDCliente());
 			
+			$Nombre = $oCliente->getNombre();
+			$Apellido = $oCliente->getApellido();
+			$FechaNacimiento = $oCliente->getFechaNacimiento();
 			$Activo = $oCliente->getActivo();
-			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
+			$PK_IDCliente = $oCliente->getPK_IDCliente();
 			
-			$STMT->bind_param($Params, $Activo,  $PK_IDCorreo);
+			$STMT->bind_param($Params, $Nombre,  $Apellido,  $FechaNacimiento,  $Activo,  $PK_IDCliente);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Cliente
 		public function Update(Cliente $oCliente){
-			$STMT = parent::PREPARE('UPDATE Cliente SET Activo = ? WHERE PK_IDCorreo = ?;');
+			$STMT = parent::PREPARE('UPDATE Cliente SET Nombre = ?, Apellido = ?, FechaNacimiento = ?, Activo = ? WHERE PK_IDCliente = ?;');
 			
-			$Params = parent::TypeParam($oCliente->getActivo()) . parent::TypeParam($oCliente->getPK_IDCorreo());
+			$Params = parent::TypeParam($oCliente->getNombre()) . parent::TypeParam($oCliente->getApellido()) . parent::TypeParam($oCliente->getFechaNacimiento()) . parent::TypeParam($oCliente->getActivo()) . parent::TypeParam($oCliente->getPK_IDCliente());
 			
+			$Nombre = $oCliente->getNombre();
+			$Apellido = $oCliente->getApellido();
+			$FechaNacimiento = $oCliente->getFechaNacimiento();
 			$Activo = $oCliente->getActivo();
-			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
+			$PK_IDCliente = $oCliente->getPK_IDCliente();
 			
-			$STMT->bind_param($Params, $Activo,  $PK_IDCorreo);
+			$STMT->bind_param($Params, $Nombre,  $Apellido,  $FechaNacimiento,  $Activo,  $PK_IDCliente);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Delete a Cliente
 		public function Delete(Cliente $oCliente){
-			$STMT = parent::PREPARE('DELETE FROM Cliente WHERE PK_IDCorreo = ?;');
+			$STMT = parent::PREPARE('DELETE FROM Cliente WHERE PK_IDCliente = ?;');
 			
-			$Params = parent::TypeParam($oCliente->getPK_IDCorreo());
+			$Params = parent::TypeParam($oCliente->getPK_IDCliente());
 			
-			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
+			$PK_IDCliente = $oCliente->getPK_IDCliente();
 			
-			$STMT->bind_param($Params, $PK_IDCorreo);
+			$STMT->bind_param($Params, $PK_IDCliente);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Select one Cliente
 		public function SelectByPrimaryKey(Cliente $oCliente){
-			$STMT = parent::PREPARE('SELECT * FROM Cliente WHERE PK_IDCorreo = ?;');
+			$STMT = parent::PREPARE('SELECT * FROM Cliente WHERE PK_IDCliente = ?;');
 			
-			$Params = parent::TypeParam($oCliente->getPK_IDCorreo());
+			$Params = parent::TypeParam($oCliente->getPK_IDCliente());
 			
-			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
+			$PK_IDCliente = $oCliente->getPK_IDCliente();
 			
-			$STMT->bind_param($Params, $PK_IDCorreo);
+			$STMT->bind_param($Params, $PK_IDCliente);
 			
 			return parent::FirstOrDefault($STMT);
 		}
@@ -71,13 +77,13 @@ namespace src\Model\DAO{
 
 		//Varify if a Cliente exist
 		public function Exists(Cliente $oCliente){
-			$STMT = parent::PREPARE('SELECT 1 FROM Cliente WHERE PK_IDCorreo = ? LIMIT 1;');
+			$STMT = parent::PREPARE('SELECT 1 FROM Cliente WHERE PK_IDCliente = ? LIMIT 1;');
 			
-			$Params = parent::TypeParam($oCliente->getPK_IDCorreo());
+			$Params = parent::TypeParam($oCliente->getPK_IDCliente());
 			
-			$PK_IDCorreo = $oCliente->getPK_IDCorreo();
+			$PK_IDCliente = $oCliente->getPK_IDCliente();
 			
-			$STMT->bind_param($Params, $PK_IDCorreo);
+			$STMT->bind_param($Params, $PK_IDCliente);
 			
 			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}

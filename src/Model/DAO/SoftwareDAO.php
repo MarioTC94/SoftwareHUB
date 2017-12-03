@@ -11,33 +11,35 @@ namespace src\Model\DAO{
 
 		//Add a Software
 		public function Add(Software $oSoftware){
-			$STMT = parent::PREPARE('INSERT INTO Software(NombreSoftware, DescripcionSoftware, Activo, TipoSoftware) VALUES (?, ?, ?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Software(NombreSoftware, DescripcionSoftware, Activo, TipoSoftware, IDProveedor) VALUES (?, ?, ?, ?, ?);');
 			
-			$Params = parent::TypeParam($oSoftware->getNombreSoftware()) . parent::TypeParam($oSoftware->getDescripcionSoftware()) . parent::TypeParam($oSoftware->getActivo()) . parent::TypeParam($oSoftware->getTipoSoftware());
+			$Params = parent::TypeParam($oSoftware->getNombreSoftware()) . parent::TypeParam($oSoftware->getDescripcionSoftware()) . parent::TypeParam($oSoftware->getActivo()) . parent::TypeParam($oSoftware->getTipoSoftware()) . parent::TypeParam($oSoftware->getIDProveedor());
 			
 			$NombreSoftware = $oSoftware->getNombreSoftware();
 			$DescripcionSoftware = $oSoftware->getDescripcionSoftware();
 			$Activo = $oSoftware->getActivo();
 			$TipoSoftware = $oSoftware->getTipoSoftware();
+			$IDProveedor = $oSoftware->getIDProveedor();
 			
-			$STMT->bind_param($Params, $NombreSoftware,  $DescripcionSoftware,  $Activo,  $TipoSoftware);
+			$STMT->bind_param($Params, $NombreSoftware,  $DescripcionSoftware,  $Activo,  $TipoSoftware,  $IDProveedor);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Software
 		public function Update(Software $oSoftware){
-			$STMT = parent::PREPARE('UPDATE Software SET NombreSoftware = ?, DescripcionSoftware = ?, Activo = ?, TipoSoftware = ? WHERE PK_IDSoftware = ?;');
+			$STMT = parent::PREPARE('UPDATE Software SET NombreSoftware = ?, DescripcionSoftware = ?, Activo = ?, TipoSoftware = ?, IDProveedor = ? WHERE PK_IDSoftware = ?;');
 			
-			$Params = parent::TypeParam($oSoftware->getNombreSoftware()) . parent::TypeParam($oSoftware->getDescripcionSoftware()) . parent::TypeParam($oSoftware->getActivo()) . parent::TypeParam($oSoftware->getTipoSoftware()) . parent::TypeParam($oSoftware->getPK_IDSoftware());
+			$Params = parent::TypeParam($oSoftware->getNombreSoftware()) . parent::TypeParam($oSoftware->getDescripcionSoftware()) . parent::TypeParam($oSoftware->getActivo()) . parent::TypeParam($oSoftware->getTipoSoftware()) . parent::TypeParam($oSoftware->getIDProveedor()) . parent::TypeParam($oSoftware->getPK_IDSoftware());
 			
 			$NombreSoftware = $oSoftware->getNombreSoftware();
 			$DescripcionSoftware = $oSoftware->getDescripcionSoftware();
 			$Activo = $oSoftware->getActivo();
 			$TipoSoftware = $oSoftware->getTipoSoftware();
+			$IDProveedor = $oSoftware->getIDProveedor();
 			$PK_IDSoftware = $oSoftware->getPK_IDSoftware();
 			
-			$STMT->bind_param($Params, $NombreSoftware,  $DescripcionSoftware,  $Activo,  $TipoSoftware,  $PK_IDSoftware);
+			$STMT->bind_param($Params, $NombreSoftware,  $DescripcionSoftware,  $Activo,  $TipoSoftware,  $IDProveedor,  $PK_IDSoftware);
 			
 			return parent::CMD($STMT);
 		}

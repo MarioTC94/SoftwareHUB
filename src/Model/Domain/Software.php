@@ -12,6 +12,7 @@ namespace src\Model\Domain{
 		private $DescripcionSoftware;
 		private $Activo;
 		private $TipoSoftware;
+		private $IDProveedor;
 		
 
 		//Constructors
@@ -21,13 +22,14 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createSoftware($PK_IDSoftware, $NombreSoftware, $DescripcionSoftware, $Activo, $TipoSoftware){
+		public static function createSoftware($PK_IDSoftware, $NombreSoftware, $DescripcionSoftware, $Activo, $TipoSoftware, $IDProveedor){
 			$instance = new self();
             $instance->PK_IDSoftware=$PK_IDSoftware;
 			$instance->NombreSoftware=$NombreSoftware;
 			$instance->DescripcionSoftware=$DescripcionSoftware;
 			$instance->Activo=$Activo;
 			$instance->TipoSoftware=$TipoSoftware;
+			$instance->IDProveedor=$IDProveedor;
 			
 			return $instance;
 		}
@@ -78,6 +80,15 @@ namespace src\Model\Domain{
 		}
 
 					
+		public function getIDProveedor(){
+			return $this->IDProveedor;
+		}
+
+		public function setIDProveedor($IDProveedor) {
+			$this->IDProveedor = $IDProveedor;
+		}
+
+					
 
 		public function toJSON(){
 			$arraySoftware = array();
@@ -86,6 +97,7 @@ namespace src\Model\Domain{
 			$arraySoftware[DescripcionSoftware] = $this->FK_[DescripcionSoftware];
 			$arraySoftware[Activo] = $this->FK_[Activo];
 			$arraySoftware[TipoSoftware] = $this->FK_[TipoSoftware];
+			$arraySoftware[IDProveedor] = $this->FK_[IDProveedor];
 			
 			return json_encode($arraySoftware);
 		}

@@ -2,14 +2,25 @@
 namespace src\Controller;
 
 use lib\Controller\BaseController;
-use Asphyo\src\Model\Domain\Usuario;
-use Asphyo\src\Model\DAO\UsuarioDAO;
+use src\Model\Domain\Usuario;
+use src\Model\DAO\SoftwareDAO;
+use src\Model\DAO\ProveedorDAO;
+use src\Model\DAO\TipoincidenteDAO;
 
 class ClienteController extends BaseController
 {
       public function Index()
       {
-            if (self::validate()) parent::View();
+            if (self::validate()) {
+                  $model = array();
+                  $oSoftwareDAO = new SoftwareDAO();
+                  $oTipoIncidente = new TipoincidenteDAO();
+
+                  $model['Software'] = $oSoftwareDAO->SelectAll();
+                  $model['TipoIncidente'] = $oTipoIncidente->SelectAll();
+
+                  parent::View($model);
+            }
       }
 
 

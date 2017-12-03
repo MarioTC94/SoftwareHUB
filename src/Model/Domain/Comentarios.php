@@ -12,6 +12,7 @@ namespace src\Model\Domain{
 		private $Incidente;
 		private $Usuario;
 		private $Activo;
+		private $FechaComentario;
 		
 
 		//Constructors
@@ -21,13 +22,14 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createComentarios($PK_IDComentarios, $DescripcionComentario, $Incidente, $Usuario, $Activo){
+		public static function createComentarios($PK_IDComentarios, $DescripcionComentario, $Incidente, $Usuario, $Activo, $FechaComentario){
 			$instance = new self();
             $instance->PK_IDComentarios=$PK_IDComentarios;
 			$instance->DescripcionComentario=$DescripcionComentario;
 			$instance->Incidente=$Incidente;
 			$instance->Usuario=$Usuario;
 			$instance->Activo=$Activo;
+			$instance->FechaComentario=$FechaComentario;
 			
 			return $instance;
 		}
@@ -78,6 +80,15 @@ namespace src\Model\Domain{
 		}
 
 					
+		public function getFechaComentario(){
+			return $this->FechaComentario;
+		}
+
+		public function setFechaComentario($FechaComentario) {
+			$this->FechaComentario = $FechaComentario;
+		}
+
+					
 
 		public function toJSON(){
 			$arrayComentarios = array();
@@ -86,6 +97,7 @@ namespace src\Model\Domain{
 			$arrayComentarios[Incidente] = $this->FK_[Incidente];
 			$arrayComentarios[Usuario] = $this->FK_[Usuario];
 			$arrayComentarios[Activo] = $this->FK_[Activo];
+			$arrayComentarios[FechaComentario] = $this->FK_[FechaComentario];
 			
 			return json_encode($arrayComentarios);
 		}

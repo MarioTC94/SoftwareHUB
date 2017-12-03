@@ -22,6 +22,26 @@
     margin: 1.6em;
 }
 
+.panel-collapsable .panel-heading h4::after{
+    display: none;
+}
+
+.panel-heading .btn-group {
+    float: right;
+    margin: 3px;
+}
+
+.states{
+    float: right;
+    margin: 0;
+    margin-right: 5px;
+}
+
+.states > span{
+    margin: 0;
+    margin-right: 3px;
+}
+
 .panel-collapsable .panel-heading h4:after {
     font-family: 'Glyphicons Halflings';
     content: "\e114";

@@ -9,7 +9,6 @@ namespace src\Model\Domain{
 		//Attributes
 		private $PK_IDTipoSoftware;
 		private $DescripcionTipoSoftware;
-		private $Activo;
 		
 
 		//Constructors
@@ -19,11 +18,10 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createTiposoftware($PK_IDTipoSoftware, $DescripcionTipoSoftware, $Activo){
+		public static function createTiposoftware($PK_IDTipoSoftware, $DescripcionTipoSoftware){
 			$instance = new self();
             $instance->PK_IDTipoSoftware=$PK_IDTipoSoftware;
 			$instance->DescripcionTipoSoftware=$DescripcionTipoSoftware;
-			$instance->Activo=$Activo;
 			
 			return $instance;
 		}
@@ -47,21 +45,11 @@ namespace src\Model\Domain{
 		}
 
 					
-		public function getActivo(){
-			return $this->Activo;
-		}
-
-		public function setActivo($Activo) {
-			$this->Activo = $Activo;
-		}
-
-					
 
 		public function toJSON(){
 			$arrayTiposoftware = array();
 			$arrayTiposoftware[PK_IDTipoSoftware] = $this->FK_[PK_IDTipoSoftware];
 			$arrayTiposoftware[DescripcionTipoSoftware] = $this->FK_[DescripcionTipoSoftware];
-			$arrayTiposoftware[Activo] = $this->FK_[Activo];
 			
 			return json_encode($arrayTiposoftware);
 		}

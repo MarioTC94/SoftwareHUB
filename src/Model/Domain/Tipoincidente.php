@@ -9,7 +9,6 @@ namespace src\Model\Domain{
 		//Attributes
 		private $PK_IDTipoIncidente;
 		private $DescripcionTipoIncidente;
-		private $Activo;
 		
 
 		//Constructors
@@ -19,11 +18,10 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createTipoincidente($PK_IDTipoIncidente, $DescripcionTipoIncidente, $Activo){
+		public static function createTipoincidente($PK_IDTipoIncidente, $DescripcionTipoIncidente){
 			$instance = new self();
             $instance->PK_IDTipoIncidente=$PK_IDTipoIncidente;
 			$instance->DescripcionTipoIncidente=$DescripcionTipoIncidente;
-			$instance->Activo=$Activo;
 			
 			return $instance;
 		}
@@ -47,21 +45,11 @@ namespace src\Model\Domain{
 		}
 
 					
-		public function getActivo(){
-			return $this->Activo;
-		}
-
-		public function setActivo($Activo) {
-			$this->Activo = $Activo;
-		}
-
-					
 
 		public function toJSON(){
 			$arrayTipoincidente = array();
 			$arrayTipoincidente[PK_IDTipoIncidente] = $this->FK_[PK_IDTipoIncidente];
 			$arrayTipoincidente[DescripcionTipoIncidente] = $this->FK_[DescripcionTipoIncidente];
-			$arrayTipoincidente[Activo] = $this->FK_[Activo];
 			
 			return json_encode($arrayTipoincidente);
 		}

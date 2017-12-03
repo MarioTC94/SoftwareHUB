@@ -11,29 +11,27 @@ namespace src\Model\DAO{
 
 		//Add a Tiposoftware
 		public function Add(Tiposoftware $oTiposoftware){
-			$STMT = parent::PREPARE('INSERT INTO Tiposoftware(DescripcionTipoSoftware, Activo) VALUES (?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Tiposoftware(DescripcionTipoSoftware) VALUES (?);');
 			
-			$Params = parent::TypeParam($oTiposoftware->getDescripcionTipoSoftware()) . parent::TypeParam($oTiposoftware->getActivo());
+			$Params = parent::TypeParam($oTiposoftware->getDescripcionTipoSoftware());
 			
 			$DescripcionTipoSoftware = $oTiposoftware->getDescripcionTipoSoftware();
-			$Activo = $oTiposoftware->getActivo();
 			
-			$STMT->bind_param($Params, $DescripcionTipoSoftware,  $Activo);
+			$STMT->bind_param($Params, $DescripcionTipoSoftware);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Tiposoftware
 		public function Update(Tiposoftware $oTiposoftware){
-			$STMT = parent::PREPARE('UPDATE Tiposoftware SET DescripcionTipoSoftware = ?, Activo = ? WHERE PK_IDTipoSoftware = ?;');
+			$STMT = parent::PREPARE('UPDATE Tiposoftware SET DescripcionTipoSoftware = ? WHERE PK_IDTipoSoftware = ?;');
 			
-			$Params = parent::TypeParam($oTiposoftware->getDescripcionTipoSoftware()) . parent::TypeParam($oTiposoftware->getActivo()) . parent::TypeParam($oTiposoftware->getPK_IDTipoSoftware());
+			$Params = parent::TypeParam($oTiposoftware->getDescripcionTipoSoftware()) . parent::TypeParam($oTiposoftware->getPK_IDTipoSoftware());
 			
 			$DescripcionTipoSoftware = $oTiposoftware->getDescripcionTipoSoftware();
-			$Activo = $oTiposoftware->getActivo();
 			$PK_IDTipoSoftware = $oTiposoftware->getPK_IDTipoSoftware();
 			
-			$STMT->bind_param($Params, $DescripcionTipoSoftware,  $Activo,  $PK_IDTipoSoftware);
+			$STMT->bind_param($Params, $DescripcionTipoSoftware,  $PK_IDTipoSoftware);
 			
 			return parent::CMD($STMT);
 		}

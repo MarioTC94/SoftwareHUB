@@ -11,29 +11,27 @@ namespace src\Model\DAO{
 
 		//Add a Rol
 		public function Add(Rol $oRol){
-			$STMT = parent::PREPARE('INSERT INTO Rol(DescripcionRol, Activo) VALUES (?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Rol(DescripcionRol) VALUES (?);');
 			
-			$Params = parent::TypeParam($oRol->getDescripcionRol()) . parent::TypeParam($oRol->getActivo());
+			$Params = parent::TypeParam($oRol->getDescripcionRol());
 			
 			$DescripcionRol = $oRol->getDescripcionRol();
-			$Activo = $oRol->getActivo();
 			
-			$STMT->bind_param($Params, $DescripcionRol,  $Activo);
+			$STMT->bind_param($Params, $DescripcionRol);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Rol
 		public function Update(Rol $oRol){
-			$STMT = parent::PREPARE('UPDATE Rol SET DescripcionRol = ?, Activo = ? WHERE PK_IDROL = ?;');
+			$STMT = parent::PREPARE('UPDATE Rol SET DescripcionRol = ? WHERE PK_IDROL = ?;');
 			
-			$Params = parent::TypeParam($oRol->getDescripcionRol()) . parent::TypeParam($oRol->getActivo()) . parent::TypeParam($oRol->getPK_IDROL());
+			$Params = parent::TypeParam($oRol->getDescripcionRol()) . parent::TypeParam($oRol->getPK_IDROL());
 			
 			$DescripcionRol = $oRol->getDescripcionRol();
-			$Activo = $oRol->getActivo();
 			$PK_IDROL = $oRol->getPK_IDROL();
 			
-			$STMT->bind_param($Params, $DescripcionRol,  $Activo,  $PK_IDROL);
+			$STMT->bind_param($Params, $DescripcionRol,  $PK_IDROL);
 			
 			return parent::CMD($STMT);
 		}

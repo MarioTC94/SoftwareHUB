@@ -7,8 +7,12 @@ namespace src\Model\Domain{
 		*/
 	class Proveedor{
 		//Attributes
-		private $PK_IDCorreo;
+		private $NombreEmpresa;
 		private $Activo;
+		private $PK_IDProveedor;
+		private $URL;
+		private $NombrePersonaConacto;
+		private $EmailPersonaContacto;
 		
 
 		//Constructors
@@ -18,21 +22,25 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createProveedor($PK_IDCorreo, $Activo){
+		public static function createProveedor($NombreEmpresa, $Activo, $PK_IDProveedor, $URL, $NombrePersonaConacto, $EmailPersonaContacto){
 			$instance = new self();
-            $instance->PK_IDCorreo=$PK_IDCorreo;
+            $instance->NombreEmpresa=$NombreEmpresa;
 			$instance->Activo=$Activo;
+			$instance->PK_IDProveedor=$PK_IDProveedor;
+			$instance->URL=$URL;
+			$instance->NombrePersonaConacto=$NombrePersonaConacto;
+			$instance->EmailPersonaContacto=$EmailPersonaContacto;
 			
 			return $instance;
 		}
 
 		
-		public function getPK_IDCorreo(){
-			return $this->PK_IDCorreo;
+		public function getNombreEmpresa(){
+			return $this->NombreEmpresa;
 		}
 
-		public function setPK_IDCorreo($PK_IDCorreo) {
-			$this->PK_IDCorreo = $PK_IDCorreo;
+		public function setNombreEmpresa($NombreEmpresa) {
+			$this->NombreEmpresa = $NombreEmpresa;
 		}
 
 					
@@ -45,11 +53,51 @@ namespace src\Model\Domain{
 		}
 
 					
+		public function getPK_IDProveedor(){
+			return $this->PK_IDProveedor;
+		}
+
+		public function setPK_IDProveedor($PK_IDProveedor) {
+			$this->PK_IDProveedor = $PK_IDProveedor;
+		}
+
+					
+		public function getURL(){
+			return $this->URL;
+		}
+
+		public function setURL($URL) {
+			$this->URL = $URL;
+		}
+
+					
+		public function getNombrePersonaConacto(){
+			return $this->NombrePersonaConacto;
+		}
+
+		public function setNombrePersonaConacto($NombrePersonaConacto) {
+			$this->NombrePersonaConacto = $NombrePersonaConacto;
+		}
+
+					
+		public function getEmailPersonaContacto(){
+			return $this->EmailPersonaContacto;
+		}
+
+		public function setEmailPersonaContacto($EmailPersonaContacto) {
+			$this->EmailPersonaContacto = $EmailPersonaContacto;
+		}
+
+					
 
 		public function toJSON(){
 			$arrayProveedor = array();
-			$arrayProveedor[PK_IDCorreo] = $this->FK_[PK_IDCorreo];
+			$arrayProveedor[NombreEmpresa] = $this->FK_[NombreEmpresa];
 			$arrayProveedor[Activo] = $this->FK_[Activo];
+			$arrayProveedor[PK_IDProveedor] = $this->FK_[PK_IDProveedor];
+			$arrayProveedor[URL] = $this->FK_[URL];
+			$arrayProveedor[NombrePersonaConacto] = $this->FK_[NombrePersonaConacto];
+			$arrayProveedor[EmailPersonaContacto] = $this->FK_[EmailPersonaContacto];
 			
 			return json_encode($arrayProveedor);
 		}

@@ -62,6 +62,12 @@ class MySQL
         self::$connection->rollback();
     }
 
+    protected final function GET_ID()
+    {
+        $ID = self::$connection->insert_id;
+        return $ID;
+    }
+
     /***********************************************/
 
     protected final function PREPARE($query)

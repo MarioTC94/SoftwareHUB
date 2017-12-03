@@ -11,29 +11,27 @@ namespace src\Model\DAO{
 
 		//Add a Estadoincidente
 		public function Add(Estadoincidente $oEstadoincidente){
-			$STMT = parent::PREPARE('INSERT INTO Estadoincidente(DescripcionEstadoIncidente, Activo) VALUES (?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Estadoincidente(DescripcionEstadoIncidente) VALUES (?);');
 			
-			$Params = parent::TypeParam($oEstadoincidente->getDescripcionEstadoIncidente()) . parent::TypeParam($oEstadoincidente->getActivo());
+			$Params = parent::TypeParam($oEstadoincidente->getDescripcionEstadoIncidente());
 			
 			$DescripcionEstadoIncidente = $oEstadoincidente->getDescripcionEstadoIncidente();
-			$Activo = $oEstadoincidente->getActivo();
 			
-			$STMT->bind_param($Params, $DescripcionEstadoIncidente,  $Activo);
+			$STMT->bind_param($Params, $DescripcionEstadoIncidente);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Estadoincidente
 		public function Update(Estadoincidente $oEstadoincidente){
-			$STMT = parent::PREPARE('UPDATE Estadoincidente SET DescripcionEstadoIncidente = ?, Activo = ? WHERE PK_IDEstadoIncidente = ?;');
+			$STMT = parent::PREPARE('UPDATE Estadoincidente SET DescripcionEstadoIncidente = ? WHERE PK_IDEstadoIncidente = ?;');
 			
-			$Params = parent::TypeParam($oEstadoincidente->getDescripcionEstadoIncidente()) . parent::TypeParam($oEstadoincidente->getActivo()) . parent::TypeParam($oEstadoincidente->getPK_IDEstadoIncidente());
+			$Params = parent::TypeParam($oEstadoincidente->getDescripcionEstadoIncidente()) . parent::TypeParam($oEstadoincidente->getPK_IDEstadoIncidente());
 			
 			$DescripcionEstadoIncidente = $oEstadoincidente->getDescripcionEstadoIncidente();
-			$Activo = $oEstadoincidente->getActivo();
 			$PK_IDEstadoIncidente = $oEstadoincidente->getPK_IDEstadoIncidente();
 			
-			$STMT->bind_param($Params, $DescripcionEstadoIncidente,  $Activo,  $PK_IDEstadoIncidente);
+			$STMT->bind_param($Params, $DescripcionEstadoIncidente,  $PK_IDEstadoIncidente);
 			
 			return parent::CMD($STMT);
 		}

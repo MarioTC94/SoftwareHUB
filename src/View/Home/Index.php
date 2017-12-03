@@ -11,7 +11,8 @@
 </head>
 <body>
     <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
-    <?php include_once(HTML_DIR . 'Template/Register.php'); ?>
+    <?php include_once(HTML_DIR . 'Template/RegisterCliente.php'); ?>
+    <?php include_once(HTML_DIR . 'Template/RegisterProveedor.php'); ?>
     <div class="preload">
         <div class="logo">
             <h2>Cargando.. <span>Espere</span></h2>

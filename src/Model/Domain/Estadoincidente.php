@@ -9,7 +9,6 @@ namespace src\Model\Domain{
 		//Attributes
 		private $PK_IDEstadoIncidente;
 		private $DescripcionEstadoIncidente;
-		private $Activo;
 		
 
 		//Constructors
@@ -19,11 +18,10 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createEstadoincidente($PK_IDEstadoIncidente, $DescripcionEstadoIncidente, $Activo){
+		public static function createEstadoincidente($PK_IDEstadoIncidente, $DescripcionEstadoIncidente){
 			$instance = new self();
             $instance->PK_IDEstadoIncidente=$PK_IDEstadoIncidente;
 			$instance->DescripcionEstadoIncidente=$DescripcionEstadoIncidente;
-			$instance->Activo=$Activo;
 			
 			return $instance;
 		}
@@ -47,21 +45,11 @@ namespace src\Model\Domain{
 		}
 
 					
-		public function getActivo(){
-			return $this->Activo;
-		}
-
-		public function setActivo($Activo) {
-			$this->Activo = $Activo;
-		}
-
-					
 
 		public function toJSON(){
 			$arrayEstadoincidente = array();
 			$arrayEstadoincidente[PK_IDEstadoIncidente] = $this->FK_[PK_IDEstadoIncidente];
 			$arrayEstadoincidente[DescripcionEstadoIncidente] = $this->FK_[DescripcionEstadoIncidente];
-			$arrayEstadoincidente[Activo] = $this->FK_[Activo];
 			
 			return json_encode($arrayEstadoincidente);
 		}

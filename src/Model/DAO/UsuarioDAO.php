@@ -7,6 +7,10 @@ namespace src\Model\DAO {
 	 */
 	use lib\Model\Databases\MySQL;
 	use src\Model\Domain\Usuario;
+	use src\Model\Domain\Cliente;
+	use src\Model\DAO\ClienteDAO;
+	use src\Model\Domain\Proveedor;
+	use src\Model\DAO\ProveedorDAO;
 
 	class UsuarioDAO extends MySQL
 	{
@@ -14,21 +18,18 @@ namespace src\Model\DAO {
 		//Add a Usuario
 		public function Add(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('INSERT INTO Usuario(NombreUsuario, Nombre, Apellido, FechaNacimiento, Contrasena, Salt, Activo, IDRol, PK_Correo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Usuario(Correo, Contrasena, Salt, FechaRegistro, Activo, IDRol) VALUES (?, ?, ?, ?, ?, ?);');
 
-			$Params = parent::TypeParam($oUsuario->getNombreUsuario()) . parent::TypeParam($oUsuario->getNombre()) . parent::TypeParam($oUsuario->getApellido()) . parent::TypeParam($oUsuario->getFechaNacimiento()) . parent::TypeParam($oUsuario->getContrasena()) . parent::TypeParam($oUsuario->getSalt()) . parent::TypeParam($oUsuario->getActivo()) . parent::TypeParam($oUsuario->getIDRol()) . parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getCorreo()) . parent::TypeParam($oUsuario->getContrasena()) . parent::TypeParam($oUsuario->getSalt()) . parent::TypeParam($oUsuario->getFechaRegistro()) . parent::TypeParam($oUsuario->getActivo()) . parent::TypeParam($oUsuario->getIDRol());
 
-			$NombreUsuario = $oUsuario->getNombreUsuario();
-			$Nombre = $oUsuario->getNombre();
-			$Apellido = $oUsuario->getApellido();
-			$FechaNacimiento = $oUsuario->getFechaNacimiento();
+			$Correo = $oUsuario->getCorreo();
 			$Contrasena = $oUsuario->getContrasena();
 			$Salt = $oUsuario->getSalt();
+			$FechaRegistro = $oUsuario->getFechaRegistro();
 			$Activo = $oUsuario->getActivo();
 			$IDRol = $oUsuario->getIDRol();
-			$PK_Correo = $oUsuario->getPK_Correo();
 
-			$STMT->bind_param($Params, $NombreUsuario, $Nombre, $Apellido, $FechaNacimiento, $Contrasena, $Salt, $Activo, $IDRol, $PK_Correo);
+			$STMT->bind_param($Params, $Correo, $Contrasena, $Salt, $FechaRegistro, $Activo, $IDRol);
 
 			return parent::CMD($STMT);
 		}
@@ -36,21 +37,19 @@ namespace src\Model\DAO {
 		//Update a Usuario
 		public function Update(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('UPDATE Usuario SET NombreUsuario = ?, Nombre = ?, Apellido = ?, FechaNacimiento = ?, Contrasena = ?, Salt = ?, Activo = ?, IDRol = ? WHERE PK_Correo = ?;');
+			$STMT = parent::PREPARE('UPDATE Usuario SET Correo = ?, Contrasena = ?, Salt = ?, FechaRegistro = ?, Activo = ?, IDRol = ? WHERE PK_IDUsuario = ?;');
 
-			$Params = parent::TypeParam($oUsuario->getNombreUsuario()) . parent::TypeParam($oUsuario->getNombre()) . parent::TypeParam($oUsuario->getApellido()) . parent::TypeParam($oUsuario->getFechaNacimiento()) . parent::TypeParam($oUsuario->getContrasena()) . parent::TypeParam($oUsuario->getSalt()) . parent::TypeParam($oUsuario->getActivo()) . parent::TypeParam($oUsuario->getIDRol()) . parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getCorreo()) . parent::TypeParam($oUsuario->getContrasena()) . parent::TypeParam($oUsuario->getSalt()) . parent::TypeParam($oUsuario->getFechaRegistro()) . parent::TypeParam($oUsuario->getActivo()) . parent::TypeParam($oUsuario->getIDRol()) . parent::TypeParam($oUsuario->getPK_IDUsuario());
 
-			$NombreUsuario = $oUsuario->getNombreUsuario();
-			$Nombre = $oUsuario->getNombre();
-			$Apellido = $oUsuario->getApellido();
-			$FechaNacimiento = $oUsuario->getFechaNacimiento();
+			$Correo = $oUsuario->getCorreo();
 			$Contrasena = $oUsuario->getContrasena();
 			$Salt = $oUsuario->getSalt();
+			$FechaRegistro = $oUsuario->getFechaRegistro();
 			$Activo = $oUsuario->getActivo();
 			$IDRol = $oUsuario->getIDRol();
-			$PK_Correo = $oUsuario->getPK_Correo();
+			$PK_IDUsuario = $oUsuario->getPK_IDUsuario();
 
-			$STMT->bind_param($Params, $NombreUsuario, $Nombre, $Apellido, $FechaNacimiento, $Contrasena, $Salt, $Activo, $IDRol, $PK_Correo);
+			$STMT->bind_param($Params, $Correo, $Contrasena, $Salt, $FechaRegistro, $Activo, $IDRol, $PK_IDUsuario);
 
 			return parent::CMD($STMT);
 		}
@@ -58,13 +57,13 @@ namespace src\Model\DAO {
 		//Delete a Usuario
 		public function Delete(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('DELETE FROM Usuario WHERE PK_Correo = ?;');
+			$STMT = parent::PREPARE('DELETE FROM Usuario WHERE PK_IDUsuario = ?;');
 
-			$Params = parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getPK_IDUsuario());
 
-			$PK_Correo = $oUsuario->getPK_Correo();
+			$PK_IDUsuario = $oUsuario->getPK_IDUsuario();
 
-			$STMT->bind_param($Params, $PK_Correo);
+			$STMT->bind_param($Params, $PK_IDUsuario);
 
 			return parent::CMD($STMT);
 		}
@@ -72,13 +71,13 @@ namespace src\Model\DAO {
 		//Select one Usuario
 		public function SelectByPrimaryKey(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('SELECT * FROM Usuario WHERE PK_Correo = ?;');
+			$STMT = parent::PREPARE('SELECT * FROM Usuario WHERE PK_IDUsuario = ?;');
 
-			$Params = parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getPK_IDUsuario());
 
-			$PK_Correo = $oUsuario->getPK_Correo();
+			$PK_IDUsuario = $oUsuario->getPK_IDUsuario();
 
-			$STMT->bind_param($Params, $PK_Correo);
+			$STMT->bind_param($Params, $PK_IDUsuario);
 
 			return parent::FirstOrDefault($STMT);
 		}
@@ -93,44 +92,54 @@ namespace src\Model\DAO {
 		//Varify if a Usuario exist
 		public function Exists(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('SELECT 1 FROM Usuario WHERE PK_Correo = ? LIMIT 1;');
+			$STMT = parent::PREPARE('SELECT 1 FROM Usuario WHERE PK_IDUsuario = ? LIMIT 1;');
 
-			$Params = parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getPK_IDUsuario());
 
-			$PK_Correo = $oUsuario->getPK_Correo();
+			$PK_IDUsuario = $oUsuario->getPK_IDUsuario();
 
-			$STMT->bind_param($Params, $PK_Correo);
+			$STMT->bind_param($Params, $PK_IDUsuario);
 
 			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 
+		public function ExistsCorreo(Usuario $oUsuario)
+		{
+			$STMT = parent::PREPARE('SELECT 1 FROM Usuario WHERE Correo = ? LIMIT 1;');
+
+			$Params = parent::TypeParam($oUsuario->getCorreo());
+
+			$Correo = $oUsuario->getCorreo();
+
+			$STMT->bind_param($Params, $Correo);
+
+			return Count(parent::FirstOrDefault($STMT)) > 0;
+		}
+
+
 		public function SelectSaltByPrimaryKey(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('SELECT Salt FROM Usuario WHERE PK_Correo = ?;');
+			$STMT = parent::PREPARE('SELECT Salt FROM Usuario WHERE Correo = ?;');
 
-			$Params = parent::TypeParam($oUsuario->getPK_Correo());
+			$Params = parent::TypeParam($oUsuario->getCorreo());
 
-			$PK_Correo = $oUsuario->getPK_Correo();
+			$Correo = $oUsuario->getCorreo();
 
 
-			$STMT->bind_param($Params, $PK_Correo);
+			$STMT->bind_param($Params, $Correo);
 			return parent::FirstOrDefault($STMT)['Salt'];
 		}
 
 		public function Login(Usuario $oUsuario)
 		{
-			$STMT = parent::PREPARE('SELECT a.Nombre Nombre, a.PK_Correo PK_Correo, b.DescripcionRol DescripcionRol FROM Usuario a JOIN Rol b ON a.IDRol = b.PK_IDROL  WHERE PK_Correo = ? AND Contrasena = ? LIMIT 1;');
-
-			$Params = parent::TypeParam($oUsuario->getPK_Correo()) . parent::TypeParam($oUsuario->getContrasena());
-
-			$PK_Correo = $oUsuario->getPK_Correo();
-
+			$STMT = parent::PREPARE('SELECT a.PK_IDUsuario PK_IDUsuario, a.Correo Correo, b.DescripcionRol DescripcionRol FROM Usuario a JOIN Rol b ON a.IDRol = b.PK_IDROL  WHERE a.Correo = ? AND a.Contrasena = ? LIMIT 1;');
+			$Params = parent::TypeParam($oUsuario->getCorreo()) . parent::TypeParam($oUsuario->getContrasena());
+			$Correo = $oUsuario->getCorreo();
 			$Contraseña = $oUsuario->getContrasena();
+			$STMT->bind_param($Params, $Correo, $Contraseña);
 
-			$STMT->bind_param($Params, $PK_Correo, $Contraseña);
 
 			return parent::FirstOrDefault($STMT);
-
 		}
 	}
 }
