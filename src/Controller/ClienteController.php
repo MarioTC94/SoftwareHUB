@@ -74,5 +74,11 @@ class ClienteController extends BaseController
                   echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar Software'));
             }
       }
+
+      public function Detalles()
+      {
+            self::validate();
+            parent::View();
+      }
 }
 ?>
