@@ -11,9 +11,9 @@ namespace src\Model\DAO{
 
 		//Add a Incidente
 		public function Add(Incidente $oIncidente){
-			$STMT = parent::PREPARE('INSERT INTO Incidente(NombreIncidente, DescripcionIncidente, EstadoIncidente, TipoIncidente, Cliente, Proveedor, Activo) VALUES (?, ?, ?, ?, ?, ?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Incidente(NombreIncidente, DescripcionIncidente, EstadoIncidente, TipoIncidente, Cliente, Proveedor, Activo, IDSoftware) VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
 			
-			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo());
+			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getIDSoftware());
 			
 			$NombreIncidente = $oIncidente->getNombreIncidente();
 			$DescripcionIncidente = $oIncidente->getDescripcionIncidente();
@@ -22,17 +22,18 @@ namespace src\Model\DAO{
 			$Cliente = $oIncidente->getCliente();
 			$Proveedor = $oIncidente->getProveedor();
 			$Activo = $oIncidente->getActivo();
+			$IDSoftware = $oIncidente->getIDSoftware();
 			
-			$STMT->bind_param($Params, $NombreIncidente,  $DescripcionIncidente,  $EstadoIncidente,  $TipoIncidente,  $Cliente,  $Proveedor,  $Activo);
+			$STMT->bind_param($Params, $NombreIncidente,  $DescripcionIncidente,  $EstadoIncidente,  $TipoIncidente,  $Cliente,  $Proveedor,  $Activo,  $IDSoftware);
 			
 			return parent::CMD($STMT);
 		}
 
 		//Update a Incidente
 		public function Update(Incidente $oIncidente){
-			$STMT = parent::PREPARE('UPDATE Incidente SET NombreIncidente = ?, DescripcionIncidente = ?, EstadoIncidente = ?, TipoIncidente = ?, Cliente = ?, Proveedor = ?, Activo = ? WHERE PK_IDIncidente = ?;');
+			$STMT = parent::PREPARE('UPDATE Incidente SET NombreIncidente = ?, DescripcionIncidente = ?, EstadoIncidente = ?, TipoIncidente = ?, Cliente = ?, Proveedor = ?, Activo = ?, IDSoftware = ? WHERE PK_IDIncidente = ?;');
 			
-			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getPK_IDIncidente());
+			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getIDSoftware()) . parent::TypeParam($oIncidente->getPK_IDIncidente());
 			
 			$NombreIncidente = $oIncidente->getNombreIncidente();
 			$DescripcionIncidente = $oIncidente->getDescripcionIncidente();
@@ -41,9 +42,10 @@ namespace src\Model\DAO{
 			$Cliente = $oIncidente->getCliente();
 			$Proveedor = $oIncidente->getProveedor();
 			$Activo = $oIncidente->getActivo();
+			$IDSoftware = $oIncidente->getIDSoftware();
 			$PK_IDIncidente = $oIncidente->getPK_IDIncidente();
 			
-			$STMT->bind_param($Params, $NombreIncidente,  $DescripcionIncidente,  $EstadoIncidente,  $TipoIncidente,  $Cliente,  $Proveedor,  $Activo,  $PK_IDIncidente);
+			$STMT->bind_param($Params, $NombreIncidente,  $DescripcionIncidente,  $EstadoIncidente,  $TipoIncidente,  $Cliente,  $Proveedor,  $Activo,  $IDSoftware,  $PK_IDIncidente);
 			
 			return parent::CMD($STMT);
 		}

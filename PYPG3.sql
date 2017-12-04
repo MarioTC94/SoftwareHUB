@@ -193,6 +193,8 @@ SELECT * FROM Usuario;*/
 	Activo BIT NOT NULL DEFAULT 1
 ) ENGINE=INNODB;
 
+ALTER TABLE Incidente ADD IDSoftware INT NOT NULL;
+ALTER TABLE Incidente ADD CONSTRAINT FK_Incidente_Software FOREIGN KEY(IDSoftware) REFERENCES Software(PK_IDSoftware)
 
                             CREATE TABLE Comentarios
                             (

@@ -92,9 +92,11 @@ class ClienteController extends BaseController
             $model = array();
             $oSoftwareDAO = new SoftwareDAO();
             $oTipoIncidente = new TipoincidenteDAO();
+            $oProveedorDAO = new ProveedorDAO();
 
-            $model['Software'] = $oSoftwareDAO->SelectAll();
             $model['TipoIncidente'] = $oTipoIncidente->SelectAll();
+            $model['Proveedor'] = $oProveedorDAO->SelectAll();
+            $model['Software'] = $oSoftwareDAO->SelectAllByProvider($model['Proveedor'][0]['PK_IDProveedor']);
 
             parent::View($model);
       }

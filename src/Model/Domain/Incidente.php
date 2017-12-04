@@ -15,6 +15,7 @@ namespace src\Model\Domain{
 		private $Cliente;
 		private $Proveedor;
 		private $Activo;
+		private $IDSoftware;
 		
 
 		//Constructors
@@ -24,7 +25,7 @@ namespace src\Model\Domain{
 		}
 
 
-		public static function createIncidente($PK_IDIncidente, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $Activo){
+		public static function createIncidente($PK_IDIncidente, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $Activo, $IDSoftware){
 			$instance = new self();
             $instance->PK_IDIncidente=$PK_IDIncidente;
 			$instance->NombreIncidente=$NombreIncidente;
@@ -34,6 +35,7 @@ namespace src\Model\Domain{
 			$instance->Cliente=$Cliente;
 			$instance->Proveedor=$Proveedor;
 			$instance->Activo=$Activo;
+			$instance->IDSoftware=$IDSoftware;
 			
 			return $instance;
 		}
@@ -111,6 +113,15 @@ namespace src\Model\Domain{
 		}
 
 					
+		public function getIDSoftware(){
+			return $this->IDSoftware;
+		}
+
+		public function setIDSoftware($IDSoftware) {
+			$this->IDSoftware = $IDSoftware;
+		}
+
+					
 
 		public function toJSON(){
 			$arrayIncidente = array();
@@ -122,6 +133,7 @@ namespace src\Model\Domain{
 			$arrayIncidente[Cliente] = $this->FK_[Cliente];
 			$arrayIncidente[Proveedor] = $this->FK_[Proveedor];
 			$arrayIncidente[Activo] = $this->FK_[Activo];
+			$arrayIncidente[IDSoftware] = $this->FK_[IDSoftware];
 			
 			return json_encode($arrayIncidente);
 		}

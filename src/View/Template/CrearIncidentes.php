@@ -25,7 +25,13 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <input type="text" name="DescripcionIncidente" class="form-control" id="txtDescripcionIncidente" placeholder="Descripcion del Incidente"/>
+                                <select name="Proveedor" class="form-control" id="CBProveedor">
+                                        <?php 
+                                        foreach ($model['Proveedor'] as $value) {
+                                            echo '<option value="' . $value['PK_IDProveedor'] . '">' . $value['NombreEmpresa'] . '</option>';
+                                        }
+                                        ?>
+                                </select>
                             </div>
                             <div class="col-sm-6">
                                 <select name="Software" class="form-control" id="CBSoftware">
@@ -42,7 +48,7 @@
                                 <input type="text" name="Estado " class="form-control" id="txtEstado" placeholder="Estado del Incidente"/>
                             </div>
                             <div class ="col-sm-6">
-                                <input type="text" name="Software" class="form-control" id="txtSoftware" placeholder="Software"/>
+                                <input type="text" name="DescripcionIncidente" class="form-control" id="txtDescripcionIncidente" placeholder="Descripcion del Incidente"/>
                             </div>    
                         </div>
                     </form>
