@@ -50,9 +50,9 @@
             </div>
       </div>
                     <div id="FooterRegister" class="modal-footer row">
-                        <div class="col-md-8" id="ErrorIncidente"></div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary" id="btnGuardarIncidente" form="CreateIncident" >¡Guardar Incidente!</button>                 
+                        <div class="col-md-8"  style="margin: 0"  id="ErrorIncidente"></div>
+                        <div class="col-md-4 text-center">
+                            <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnGuardarIncidente" form="CreateIncident" value="Guardar"/>
                         </div>
                 </div>
         </div>

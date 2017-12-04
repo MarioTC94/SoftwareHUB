@@ -20,9 +20,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                    <div class="col-md-9" id="ErrorLogin"></div>
-                        <div class="col-sm-3 contenedor-boton">
-                            <button type="submit" class="btn btn-primary" id="btnSubmit" >Iniciar Sesión</button>
+                    <div class="col-md-9" style="margin: 0" id="ErrorLogin"></div>
+                        <div class="col-sm-3 text-center">
+                            <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnSubmit" value="Iniciar Sesión"/>
                         </div>
                     </div>
                 </form>
