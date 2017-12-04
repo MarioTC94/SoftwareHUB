@@ -17,9 +17,9 @@ class HomeController extends BaseController
 {
     public function Index()
     {
-        if (self::validate()) {
-            parent::View();
-        }
+        self::validate();
+        parent::View();
+
     }
 
     public function RegistroCliente()

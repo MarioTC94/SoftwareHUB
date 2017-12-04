@@ -8,6 +8,8 @@ use src\Model\DAO\ProveedorDAO;
 use src\Model\DAO\TipoincidenteDAO;
 use src\Model\Domain\Incidente;
 use src\Model\DAO\IncidenteDAO;
+use lib\Helper\MySQLHelper;
+use lib\Route\Url;
 
 class ClienteController extends BaseController
 {
@@ -15,6 +17,52 @@ class ClienteController extends BaseController
       {
             self::validate();
             $model = self::getData();
+
+            $IncidenteDAO = new IncidenteDAO();
+            $model['Incidentes'] = \array_reverse($IncidenteDAO->SelectAllByCliente($_SESSION['UsuarioLogueado']['ID']));
+
+            for ($i = 0; $i < \count($model['Incidentes']); $i++) {
+                  switch ($model['Incidentes'][$i]['DescripcionTipoIncidente']) {
+                        case 'Bug':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-danger';
+                              break;
+                        case 'Mejora':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-success';
+                              break;
+                        case 'Pregunta':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-info';
+                              break;
+                        case 'Ayuda':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-warning';
+                              break;
+
+                        default:
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-default';
+                              break;
+                  }
+
+                  switch ($model['Incidentes'][$i]['DescripcionEstadoIncidente']) {
+                        case 'Abierto':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-success';
+                              break;
+                        case 'En Proceso':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-warning';
+                              break;
+                        case 'Cerrado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-danger';
+                              break;
+                        case 'Duplicado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-warning';
+                              break;
+                        case 'Solucionado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-success';
+                              break;
+                        default:
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-default';
+                              break;
+                  }
+            }
+
             parent::View($model);
 
       }
@@ -55,25 +103,82 @@ class ClienteController extends BaseController
             $oIncidente->setEstadoIncidente(1);
             $oIncidente->setCliente($_SESSION['UsuarioLogueado']['ID']);
 
-            if ($oIncidenteDAO->Add($oIncidente)) {
-                  echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Exito, Incidente Creado'));
-            } else {
+            if (!$oIncidenteDAO->Add($oIncidente)) {
                   echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al crear incidente'));
+                  exit();
             }
+
+            $Primary = MySQLHelper::getLastID();
+            $Data = $oIncidenteDAO->SelectAllInfoByPrimaryKey($Primary);
+
+
+            $Data['URLDetalle'] = Url::toAction('Cliente', 'Detalles', $Primary);
+
+            switch ($Data['DescripcionTipoIncidente']) {
+                  case 'Bug':
+                        $Data['LabelTipoIncidente'] = 'label-danger';
+                        break;
+                  case 'Mejora':
+                        $Data['LabelTipoIncidente'] = 'label-success';
+                        break;
+                  case 'Pregunta':
+                        $Data['LabelTipoIncidente'] = 'label-info';
+                        break;
+                  case 'Ayuda':
+                        $Data['LabelTipoIncidente'] = 'label-warning';
+                        break;
+                  default:
+                        $Data['LabelTipoIncidente'] = 'label-default';
+                        break;
+            }
+
+            switch ($Data['DescripcionEstadoIncidente']) {
+                  case 'Abierto':
+                        $Data['LabelEstadoIncidente'] = 'label-success';
+                        break;
+                  case 'En Proceso':
+                        $Data['LabelEstadoIncidente'] = 'label-warning';
+                        break;
+                  case 'Cerrado':
+                        $Data['LabelEstadoIncidente'] = 'label-danger';
+                        break;
+                  case 'Duplicado':
+                        $Data['LabelEstadoIncidente'] = 'label-warning';
+                        break;
+                  case 'Solucionado':
+                        $Data['LabelEstadoIncidente'] = 'label-success';
+                        break;
+                  default:
+                        $Data['LabelEstadoIncidente'] = 'label-default';
+                        break;
+            }
+
+            echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Exito, Incidente Creado', 'Data' => $Data));
       }
 
       public function Detalles($IDIncidente = null)
       {
 
-            $Incidente = new DaoIncidente();
-            $Incidente->getInfoIncitenteByPrimaryKey($IDIncidente);
-
+            self::validate();
             if ($IDIncidente == null) {
                   parent::toView('Cliente', '');
             }
-
-            self::validate();
             $model = self::getData();
+
+            $oIncidenteDAO = new IncidenteDAO();
+
+
+            $model['Incidente'] = $oIncidenteDAO->SelectAllInfoByPrimaryKey($IDIncidente);
+
+            if (\count($model['Incidente']) == 0) {
+                  parent::toView('Error', 'PageNotFound');
+            }
+
+            if ($model['Incidente']['PK_IDCliente'] != $_SESSION['UsuarioLogueado']['ID']) {
+                  parent::toView('Error', 'PageNotFound');
+            }
+
+
             parent::View($model);
       }
 

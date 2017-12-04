@@ -10,8 +10,20 @@
 	<?= $Html::css(['bootstrap.min', 'main', 'preload']); ?>
 </head>
 <body>
-    <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
-    <?php include_once(HTML_DIR . 'Template/Register.php'); ?>
+
+    <?php
+    if (isset($_SESSION['UsuarioLogueado'])) {
+        if ($_SESSION['UsuarioLogueado']['Rol'] == 'Cliente') {
+            include_once(HTML_DIR . 'Template/CrearIncidentes.php');
+        } else {
+            include_once(HTML_DIR . 'Template/CrearSoftware.php');
+        }
+    } else {
+        include_once(HTML_DIR . 'Template/Login.php');
+        include_once(HTML_DIR . 'Template/RegisterCliente.php');
+        include_once(HTML_DIR . 'Template/RegisterProveedor.php');
+    }
+    ?>
     <div class="preload">
         <div class="logo">
             <h2>Cargando... <span>Espere</span></h2>
@@ -23,7 +35,17 @@
     </div>
     <header>
         <div class="row">
-                <?php include_once(HTML_DIR . 'Template/nav.php') ?>
+                    <?php
+                    if (isset($_SESSION['UsuarioLogueado'])) {
+                        if ($_SESSION['UsuarioLogueado']['Rol'] == 'Cliente') {
+                            include_once(HTML_DIR . 'Template/navClientes.php');
+                        } else {
+                            include_once(HTML_DIR . 'Template/navProveedor.php');
+                        }
+                    } else {
+                        include_once(HTML_DIR . 'Template/nav.php');
+                    }
+                    ?>
         </div>
     </header>
     <div class="paralax">

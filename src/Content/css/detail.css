@@ -14,12 +14,32 @@
    margin-left: 60px;
 }
 
+.left{
+   padding: 15px;
+}
+
+.right{
+   padding: 15px;
+}
+
+.text-green{
+   color: #5cb85c;
+}
+
+.text-yellow{
+   color: #f0ad4e;
+}
+
 .chat li.right .chat-body {
    margin-right: 60px;
 }
 
 .chat li .chat-body p {
    margin: 0;
+}
+
+.chat-panel .panel-body{
+   padding: 0;
 }
 
 .panel .slidedown .glyphicon,

@@ -16,7 +16,7 @@
             <li class=""><a href="<?= $Url::toAction('Home', 'Index'); ?>">Inicio</a></li>
             <li class=""><a href="#" data-toggle="modal" data-target="#LoginModal">Ingresar</a></li>
             <li class=""><a href="#" data-toggle="modal" data-target="#RegisterModalCliente">Registrar Cliente</a></li>
-            <li class=""><a href="#" data-toggle="modal" data-target="#RegisterModalProveedor">Registrar Proveedor</a></li>   
+            <li class=""><a href="#" data-toggle="modal" data-target="#RegisterModalProveedor">Registrar Proveedor</a></li>
          </ul>
       </div>
    </div>

@@ -23,7 +23,7 @@ class Url
 
     public static function toAction($controller, $action, $id = null)
     {
-        if ($id = null) {
+        if ($id == null) {
             $urlString = APP_URL . "{$controller}/{$action}";
         } else {
             $urlString = APP_URL . "{$controller}/{$action}/{$id}";

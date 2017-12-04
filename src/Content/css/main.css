@@ -66,10 +66,10 @@
   .panel-collapsable .collapsed h4:after {
     content: "\e080";
   }
+  
   .panel-heading .btn-group {
     float: right;
   }
-
 
 .video{
     display: block;
@@ -97,7 +97,7 @@ header .navbar {
     margin-bottom: 0;
     position: fixed;
     width: 100%;
-    z-index: 999;
+    z-index: 99999;
     border-bottom: 2px solid #000;
     box-shadow: rgba(0,0,0,0.4) 0px 3px;
 }

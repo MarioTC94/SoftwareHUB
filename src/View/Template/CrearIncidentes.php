@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group row">
                             <div class ="col-sm-12">
-                                <input type="text" name="DescripcionIncidente" class="form-control" placeholder="Descripcion del Incidente"/>
+                                <textarea rows="4" name="DescripcionIncidente" class="form-control" placeholder="Amplia Descripcion del Incidente"></textarea></textarea>
                             </div>    
                         </div>
                     </form>

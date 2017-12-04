@@ -20,22 +20,25 @@
             <div class="incident">
                   <div class="row">
                         <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-8" id='ContainerIncident'>
                               <!-- Inicio del Panel -->
-                        <div class="panel panel-primary panel-collapsable panel-chart">
+                        <?php foreach ($model['Incidentes'] as $Incidente) { ?>
+                              <div class="panel panel-primary panel-collapsable panel-chart">
                               <div class="panel-heading">
                                     <div class="btn-group text-right">
                                           <button class="btn btn-primary toggle-dropdown" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="glyphicon glyphicon-cog"></span></button>
                                           <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a href="#">Detalle Incidente</a></li>
-                                                <li><a href="#">Responder Incidente</a></li>
+                                                <li><a href="<?= $Url::toAction('Cliente', 'Detalles', $Incidente['PK_IDIncidente']); ?>">Detalle Incidente</a></li>
                                           </ul>
                                     </div>
-                                    <h4 class="collapsed" data-toggle="collapse" data-target="#sg1" aria-expanded="false">Software no inicia<div class="states"><span class="label label-danger">Bug</span><span class="label label-success">En Proceso</span></div></h4>
+                                    <h4 class="collapsed" data-toggle="collapse" data-target="#sg<?= $Incidente['PK_IDIncidente'] ?>" aria-expanded="false"><?= $Incidente['NombreIncidente'] ?><div class="states"><span class="label <?= $Incidente['LabelTipoIncidente'] . ' ">' . $Incidente['DescripcionTipoIncidente'] ?></span><span class="label  <?= $Incidente['LabelEstadoIncidente'] . ' ">' . $Incidente['DescripcionEstadoIncidente'] ?></span></div></h4>
                                     <div class="clearfix"></div>
                               </div>
-                              <div id="sg1" class="panel-body collapse" aria-expanded="true"><p>Javascript does not have multiline strings in the way you are writing them, you can't just open a string on one line, go down a few lines and then close it. (there are some ways of doing multi-line strings in JS, but they are kind of backwards).</p></div>
+                              <div id="sg<?= $Incidente['PK_IDIncidente'] ?>" class="panel-body collapse" aria-expanded="true"><p><?= $Incidente['DescripcionIncidente'] ?></p></div>
                         </div>
+
+                        <?php 
+                  } ?>
                         <!-- Fin del Panel -->
                    </div>
             <div class="col-lg-2"></div>

@@ -235,6 +235,23 @@ $(document).ready(function () {
                             $('#ErrorIncidente').html("");
                             $('#btnInsertarIncidente').prop('disabled', false);
                         }, 3000);
+
+                        var panel = `<div class="panel panel-primary panel-collapsable panel-chart">
+                        <div class="panel-heading">
+                            <div class="btn-group text-right">
+                                <button class="btn btn-primary toggle-dropdown" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"><span class="glyphicon glyphicon-cog"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="`+ Respuesta.Data['URLDetalle'] + `">Detalle Incidente</a></li>
+                                </ul>
+                            </div>
+                            <h4 class="collapsed" data-toggle="collapse" data-target="#sg`+ Respuesta.Data['PK_IDIncidente'] + `" aria-expanded="false"> ` + Respuesta.Data['NombreIncidente'] + `<div class="states"><span class="label  ` + Respuesta.Data['LabelTipoIncidente'] + `  "> ` + Respuesta.Data['DescripcionTipoIncidente'] + `</span><span class="label  ` + Respuesta.Data['LabelEstadoIncidente'] + `  ">` + Respuesta.Data['DescripcionEstadoIncidente'] + `</span></div></h4>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="sg`+ Respuesta.Data['PK_IDIncidente'] + `" class="panel-body collapse" aria-expanded="true"><p>` + Respuesta.Data['DescripcionIncidente'] + `</p></div>
+                    </div>`
+                        setTimeout(function () {
+                            $(panel).hide().prependTo("#ContainerIncident").slideDown();
+                        }, 3500);
                         break;
                     default:
                         $('#ErrorIncidente').html("");

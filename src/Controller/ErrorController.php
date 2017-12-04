@@ -8,6 +8,7 @@ class ErrorController extends BaseController
 
    public function PageNotFound()
    {
+      \session_start();
       parent::View();
    }
 

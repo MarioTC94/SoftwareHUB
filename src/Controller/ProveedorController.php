@@ -7,6 +7,7 @@ use Asphyo\src\Model\DAO\UsuarioDAO;
 use src\Model\DAO\TiposoftwareDAO;
 use src\Model\DAO\SoftwareDAO;
 use src\Model\Domain\Software;
+use src\Model\DAO\IncidenteDAO;
 
 class ProveedorController extends BaseController
 {
@@ -17,8 +18,80 @@ class ProveedorController extends BaseController
             $oTipoSoftwareDAO = new TiposoftwareDAO();
             $model['TipoSoftware'] = $oTipoSoftwareDAO->SelectAll();
 
+            $IncidenteDAO = new IncidenteDAO();
+            $model['Incidentes'] = \array_reverse($IncidenteDAO->SelectAllByProveedor($_SESSION['UsuarioLogueado']['ID']));
+
+            for ($i = 0; $i < \count($model['Incidentes']); $i++) {
+                  switch ($model['Incidentes'][$i]['DescripcionTipoIncidente']) {
+                        case 'Bug':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-danger';
+                              break;
+                        case 'Mejora':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-success';
+                              break;
+                        case 'Pregunta':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-info';
+                              break;
+                        case 'Ayuda':
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-warning';
+                              break;
+
+                        default:
+                              $model['Incidentes'][$i]['LabelTipoIncidente'] = 'label-default';
+                              break;
+                  }
+
+                  switch ($model['Incidentes'][$i]['DescripcionEstadoIncidente']) {
+                        case 'Abierto':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-success';
+                              break;
+                        case 'En Proceso':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-warning';
+                              break;
+                        case 'Cerrado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-danger';
+                              break;
+                        case 'Duplicado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-warning';
+                              break;
+                        case 'Solucionado':
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-success';
+                              break;
+                        default:
+                              $model['Incidentes'][$i]['LabelEstadoIncidente'] = 'label-default';
+                              break;
+                  }
+            }
+
             parent::View($model);
 
+      }
+
+      public function Detalles($IDIncidente = null)
+      {
+
+            self::validate();
+            if ($IDIncidente == null) {
+                  parent::toView('Proveedor', '');
+            }
+            $model = array();
+
+            $oIncidenteDAO = new IncidenteDAO();
+
+
+            $model['Incidente'] = $oIncidenteDAO->SelectAllInfoByPrimaryKey($IDIncidente);
+
+            if (\count($model['Incidente']) == 0) {
+                  parent::toView('Error', 'PageNotFound');
+            }
+
+            if ($model['Incidente']['PK_IDProveedor'] != $_SESSION['UsuarioLogueado']['ID']) {
+
+                  parent::toView('Error', 'PageNotFound');
+            }
+
+
+            parent::View($model);
       }
 
       public function AddSoftware()
