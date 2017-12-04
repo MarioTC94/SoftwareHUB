@@ -40,9 +40,9 @@
             </div>
       </div>
       <div id="FooterRegister" class="modal-footer row">
-          <div class="col-md-8" id="ErrorProveedor"></div>
-          <div class="col-md-4">
-            <button type="submit" class="btn btn-primary" id="btnSubmitRegister" form="FormRegisterProveedor" >¡Registrar Proveedor!</button>                 
+          <div class="col-md-8" style="margin: 0" id="ErrorProveedor"></div>
+          <div class="col-md-4 text-center">
+            <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnRegistrarProveedor" form="FormRegisterProveedor" value="Registrar"/>            
           </div>
        
       </div>

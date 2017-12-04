@@ -23,10 +23,11 @@ class ProveedorController extends BaseController
 
       public function AddSoftware()
       {
-            self::validate();
             if (!isset($_POST["DatosSoftware"])) {
                   parent::toView('Error', 'PageNotFound');
             }
+
+            self::validate();
 
             $DataSoftware = \json_decode($_POST["DatosSoftware"], true);
             $Software = new Software();

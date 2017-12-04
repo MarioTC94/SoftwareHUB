@@ -22,6 +22,11 @@
     margin: 1.6em;
 }
 
+.row {
+    margin-right: 0; 
+    margin-left: 0;
+}
+
 .panel-collapsable .panel-heading h4::after{
     display: none;
 }
@@ -29,6 +34,14 @@
 .panel-heading .btn-group {
     float: right;
     margin: 3px;
+}
+
+.modal-footer {
+    text-align: left; 
+}
+
+.alert{
+    margin-bottom: 0;
 }
 
 .states{

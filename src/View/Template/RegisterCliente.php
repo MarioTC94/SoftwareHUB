@@ -43,9 +43,9 @@
             </div>
       </div>
       <div id="FooterRegister" class="modal-footer row">
-          <div class="col-md-8" id="ErrorCliente"></div>
-          <div class="col-md-4">
-            <button type="submit" class="btn btn-primary" id="btnSubmitRegister" form="FormRegisterCliente" >¡Registrar Cliente!</button>                 
+          <div class="col-md-8" style="margin: 0" id="ErrorCliente"></div>
+          <div class="col-md-4 text-center">
+                <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnRegistrarCliente" form="FormRegisterCliente" value="Registrar"/>
           </div>
       </div>
     </div>
