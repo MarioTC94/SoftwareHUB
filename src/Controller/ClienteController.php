@@ -77,6 +77,13 @@ class ClienteController extends BaseController
 
       public function Detalles($IDIncidente = null)
       {
+
+            $Incidente = new DaoIncidente();
+            $Incidente->getInfoIncitenteByPrimaryKey($IDIncidente);
+
+
+
+
             if ($IDIncidente == null) {
                   parent::toView('Cliente', '');
             }
