@@ -12,25 +12,37 @@ class ProveedorController extends BaseController
 {
       public function Index()
       {
-            if (self::validate()) {
-                  $model = array();
-                  $oTipoSoftwareDAO = new TiposoftwareDAO();
-                  $model['TipoSoftware'] = $oTipoSoftwareDAO->SelectAll();
+            self::validate();;
+            $model = array();
+            $oTipoSoftwareDAO = new TiposoftwareDAO();
+            $model['TipoSoftware'] = $oTipoSoftwareDAO->SelectAll();
 
-                  parent::View($model);
-            }
+            parent::View($model);
+
       }
 
-      public function RegistroSoftware()
+      public function AddSoftware()
       {
-            if (self::validate()) {
-                  $DataRegister = \json_decode($_POST["DatosRegistroSoftware"], true);
-                  $Software = new Software();
-                  $SoftwareDao = new SoftwareDAO();
-                  $Software->setActivo(1);
-                  $Software->setNombreSoftware($DataRegister["NombreSoftware"]);
-                  $Software->setDescripcionSoftware($DataRegister["DescripcionSoftware"]);
+            self::validate();
+            if (!isset($_POST["DatosSoftware"])) {
+                  parent::toView('Error', 'PageNotFound');
             }
+
+            $DataSoftware = \json_decode($_POST["DatosSoftware"], true);
+            $Software = new Software();
+            $SoftwareDao = new SoftwareDAO();
+            $Software->setActivo(1);
+            $Software->setNombreSoftware($DataSoftware["NombreSoftware"]);
+            $Software->setDescripcionSoftware($DataSoftware["DescripcionSoftware"]);
+            $Software->setIDProveedor($_SESSION['UsuarioLogueado']['ID']);
+            $Software->setTipoSoftware($DataSoftware['TipoSoftware']);
+
+            if ($SoftwareDao->Add($Software)) {
+                  echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Software insertado correctamente'));
+            } else {
+                  echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar software'));
+            }
+
       }
 
       public function LogOut()
@@ -48,36 +60,10 @@ class ProveedorController extends BaseController
                         return true;
                   } else {
                         parent::toView('Cliente', 'Index');
+                        exit();
                   }
             } else
                   parent::toView('Home', 'Index');
-      }
-
-      public function AddSoftware()
-      {
-
-            if (!isset($_POST["DatosSoftware"])) {
-                  parent::toView('Error', 'PageNotFound');
-            }
-
-            \session_start();
-
-            $DataSoftware = \json_decode($_POST["DatosSoftware"], true);
-
-            $oSoftwareDAO = new SoftwareDAO();
-            $oSoftware = new Software();
-
-            $oSoftware->setActivo(1);
-            $oSoftware->setNombreSoftware($DataSoftware["NombreSoftware"]);
-            $oSoftware->setTipoSoftware($DataSoftware["TipoSoftware"]);
-            $oSoftware->setDescripcionSoftware($DataSoftware["DescripcionSoftware"]);
-            $oSoftware->setIDProveedor($_SESSION['UsuarioLogueado']['ID']);
-
-            if ($oSoftwareDAO->Add($oSoftware)) {
-                  echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Exito, Software Creado'));
-            } else {
-                  echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar Software'));
-            }
       }
 }
 ?>

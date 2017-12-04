@@ -13,16 +13,16 @@ class ClienteController extends BaseController
 {
       public function Index()
       {
-            if (self::validate()) {
-                  $model = array();
-                  $oSoftwareDAO = new SoftwareDAO();
-                  $oTipoIncidente = new TipoincidenteDAO();
+            self::validate();
+            $model = array();
+            $oSoftwareDAO = new SoftwareDAO();
+            $oTipoIncidente = new TipoincidenteDAO();
 
-                  $model['Software'] = $oSoftwareDAO->SelectAll();
-                  $model['TipoIncidente'] = $oTipoIncidente->SelectAll();
+            $model['Software'] = $oSoftwareDAO->SelectAll();
+            //$model['TipoIncidente'] = $oTipoIncidente->SelectAll();
 
-                  parent::View($model);
-            }
+            parent::View($model);
+
       }
 
 

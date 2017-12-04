@@ -55,8 +55,8 @@ $(document).ready(function () {
             }
         });
     });
-    // Ajax para Registro y Login
 
+    // Ajax para  Login
     $('#FormLogin').submit(function (e) {
         e.preventDefault();
         var Data = JSON.stringify(getFormData($('#FormLogin')));
@@ -85,7 +85,9 @@ $(document).ready(function () {
 
     });
 
-    $('#"CreateSoftware').submit(function (e) {
+
+    //Ajax para insertar Software (Proovedor);
+    $('#CreateSoftware').submit(function (e) {
         e.preventDefault();
         var Data = JSON.stringify(getFormData($('#CreateSoftware')));
         $.ajax({
@@ -112,20 +114,16 @@ $(document).ready(function () {
             }
         });
 
-
-
-
-        //Helper para ordenar los datos
-        function getFormData($form) {
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
-            $.map(unindexed_array, function (n, i) {
-                indexed_array[n['name']] = n['value'];
-            });
-            return indexed_array;
-        }
-
     });
 
+    //Helper para ordenar los datos
+    function getFormData($form) {
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+        $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+        });
+        return indexed_array;
+    }
 
-
+});
