@@ -19,6 +19,18 @@ class ProveedorController extends BaseController
             }
       }
 
+      public function RegistroSoftware()
+      {
+            if (self::validate()) {
+                  $DataRegister = \json_decode($_POST["DatosRegistroSoftware"], true);
+                  $Software = new Software();
+                  $SoftwareDao = new SoftwareDAO();
+                  $Software->setActivo(1);
+                  $Software->setNombreSoftware($DataRegister["NombreSoftware"]);
+                  $Software->setDescripcionSoftware($DataRegister["DescripcionSoftware"]);
+            }
+      }
+
       public function LogOut()
       {
             \session_start();

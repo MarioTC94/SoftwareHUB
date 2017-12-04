@@ -91,7 +91,7 @@ class HomeController extends BaseController
         $oUsuario->setFechaRegistro(\date('Y-m-d H:i:s'));
         $oUsuario->setCorreo($DataRegister["Correo"]);
         $oUsuario->setSalt(\mcrypt_create_iv(32));
-        $oUsuario->setContrasena(\hash('sha256', $DataRegister['Contrasena'] . $oUsuario->getSalt()));
+        $oUsuario->setContrasena(\hex2bin(\hash('sha256', $DataRegister['Contrasena'] . $oUsuario->getSalt())));
         $oProveedor = new Proveedor();
         $oProveedor->setActivo(1);
         $oProveedor->setNombreEmpresa($DataRegister['NombreEmpresa']);

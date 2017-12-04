@@ -31,7 +31,7 @@
                                                 <li><a href="#">Responder Incidente</a></li>
                                           </ul>
                                     </div>
-                                    <h4 class="collapsed" data-toggle="collapse" data-target="#sg1" aria-expanded="false">Ultimos Incidentes Creados<div class="states"><span class="label label-danger">Critico</span><span class="label label-success">En Proceso</span></div></h4>
+                                    <h4 class="collapsed" data-toggle="collapse" data-target="#sg1" aria-expanded="false">Software no inicia<div class="states"><span class="label label-danger">Bug</span><span class="label label-success">En Proceso</span></div></h4>
                                     <div class="clearfix"></div>
                               </div>
                               <div id="sg1" class="panel-body collapse" aria-expanded="true"><p>Javascript does not have multiline strings in the way you are writing them, you can't just open a string on one line, go down a few lines and then close it. (there are some ways of doing multi-line strings in JS, but they are kind of backwards).</p></div>
