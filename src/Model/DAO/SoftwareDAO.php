@@ -85,7 +85,7 @@ namespace src\Model\DAO {
 
 		public function SelectAllByProvider($IDProveedor)
 		{
-			$STMT = parent::PREPARE('SELECT * FROM Software Where IDProveedor = ?;');
+			$STMT = parent::PREPARE('SELECT PK_IDSoftware, NombreSoftware  FROM Software Where IDProveedor = ?;');
 
 			$Params = parent::TypeParam($IDProveedor);
 

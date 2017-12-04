@@ -188,6 +188,99 @@ $(document).ready(function () {
             }
         });
     });
+
+
+
+
+
+
+
+    //Ajax para insertar Incidente
+    $('#CreateIncidentForm').submit(function (e) {
+        e.preventDefault();
+
+        var errors = 0;
+        $("#CreateIncidentForm :input").map(function () {
+            if (!$(this).val()) {
+                $(this).parent().addClass('has-danger');
+                errors++;
+            } else if ($(this).val()) {
+                $(this).parent().removeClass('has-danger');
+            }
+        });
+        if (errors > 0) {
+            $('#ErrorIncidente').html("");
+            $('#ErrorIncidente').append('<div class="alert alert-danger"><strong>Error! </strong>Campos vacíos</div>');
+            return false;
+        }
+
+        $('#btnInsertarIncidente').prop('disabled', true);
+        var Data = JSON.stringify(getFormData($('#CreateIncidentForm')));
+        $.ajax({
+            url: '/SoftwareHUB/Cliente/AddIncident/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            type: 'POST',
+            data: {
+                DatosIncidente: Data
+            },
+            dataType: 'json',
+            success: function (Respuesta) {
+                switch (Respuesta.Codigo) {
+                    case 1:
+                        $('#ErrorIncidente').html("");
+                        $('#ErrorIncidente').append('<div class="alert alert-success" style="width: 100%, height: 100%"><strong>Exito! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#CreateIncident').delay(2000).fadeOut(1000);
+                        setTimeout(function () {
+                            $('#CreateIncident').modal("hide");
+                            $('#CreateIncidentForm').trigger("reset");
+                            $('#ErrorIncidente').html("");
+                            $('#btnInsertarIncidente').prop('disabled', false);
+                        }, 3000);
+                        break;
+                    default:
+                        $('#ErrorIncidente').html("");
+                        $('#ErrorIncidente').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#btnInsertarIncidente').prop('disabled', false);
+                        break;
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
+
+
+    $('#CBProveedor').on('change', function () {
+
+        $('#CBSoftware').empty();
+        $.ajax({
+            url: '/SoftwareHUB/Cliente/getSoftwareByID/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            type: 'POST',
+            data: {
+                IDProveedor: $('#CBProveedor').val()
+            },
+            dataType: 'json',
+            success: function (Respuesta) {
+                switch (Respuesta.Codigo) {
+                    case 1:
+                        for (var i = 0; i < Respuesta.Data.length; i++) {
+                            $('#CBSoftware').append('<option value="' + Respuesta.Data[i]['PK_IDSoftware'] + '">' + Respuesta.Data[i]['NombreSoftware'] + '</option>');
+                        }
+                        break;
+                    default:
+                        $('#ErrorIncidente').html("");
+                        $('#ErrorIncidente').append('<div class="alert alert-danger"><strong>Error! </strong>Error al traer Software</div>');
+                        break;
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
+
+
+
     //Helper para ordenar los datos
     function getFormData($form) {
         var unindexed_array = $form.serializeArray();

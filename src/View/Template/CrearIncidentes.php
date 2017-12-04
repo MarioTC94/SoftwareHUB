@@ -8,7 +8,7 @@
 		<div class="modal-body">
             <div class="container-fluid row">
                 <div class="col-md-12">
-                    <form id="CreateIncident" method="POST" class="form-horizontal" >
+                    <form id="CreateIncidentForm" method="POST" class="form-horizontal" >
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <input type="text" name="NombreIncidente" class="form-control" id="txtNombre"  placeholder="Nombre Incidente.."/>
@@ -43,12 +43,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class = "form-group row">
-                            <div class = "col-sm-6">
-                                <input type="text" name="Estado " class="form-control" id="txtEstado" placeholder="Estado del Incidente"/>
-                            </div>
-                            <div class ="col-sm-6">
-                                <input type="text" name="DescripcionIncidente" class="form-control" id="txtDescripcionIncidente" placeholder="Descripcion del Incidente"/>
+                        <div class="form-group row">
+                            <div class ="col-sm-12">
+                                <input type="text" name="DescripcionIncidente" class="form-control" placeholder="Descripcion del Incidente"/>
                             </div>    
                         </div>
                     </form>
@@ -58,7 +55,7 @@
                     <div id="FooterRegister" class="modal-footer row">
                         <div class="col-md-8"  style="margin: 0"  id="ErrorIncidente"></div>
                         <div class="col-md-4 text-center">
-                            <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnGuardarIncidente" form="CreateIncident" value="Guardar"/>
+                            <input type="submit" class="btn btn-primary" style="margin: 10px 0" id="btnGuardarIncidente" form="CreateIncidentForm" value="Guardar"/>
                         </div>
                 </div>
         </div>
