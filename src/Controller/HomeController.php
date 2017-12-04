@@ -70,7 +70,7 @@ class HomeController extends BaseController
 
         $Respuesta = array('Codigo' => 1, 'Mensaje' => 'Exito', 'Rol' => 'Cliente');
         \session_start();
-        $_SESSION['UsuarioLogueado'] = array('Nombre' => $oCliente->getNombre(), 'Correo' => $oUsuario->getCorreo(), 'Rol' => 'Cliente');
+        $_SESSION['UsuarioLogueado'] = array('Nombre' => $oCliente->getNombre(), 'Correo' => $oUsuario->getCorreo(), 'Rol' => 'Cliente', 'ID' => $oCliente->getPK_IDCliente());
         echo \json_encode($Respuesta);
     }
 
@@ -125,7 +125,7 @@ class HomeController extends BaseController
 
         $Respuesta = array('Codigo' => 1, 'Mensaje' => 'Exito', 'Rol' => 'Proveedor');
         \session_start();
-        $_SESSION['UsuarioLogueado'] = array('Nombre' => $oProveedor->getNombreEmpresa(), 'PK_Correo' => $oUsuario->getCorreo(), 'Rol' => 'Proveedor');
+        $_SESSION['UsuarioLogueado'] = array('Nombre' => $oProveedor->getNombreEmpresa(), 'PK_Correo' => $oUsuario->getCorreo(), 'Rol' => 'Proveedor', 'ID' => $oProveedor->getPK_IDProveedor());
         echo \json_encode($Respuesta);
 
     }
@@ -182,7 +182,7 @@ class HomeController extends BaseController
 
             $Respuesta = array('Codigo' => 1, 'Mensaje' => 'Exito', 'Rol' => $Logued['DescripcionRol']);
             \session_start();
-            $_SESSION['UsuarioLogueado'] = array('Nombre' => $Nombre, 'Correo' => $Logued['Correo'], 'Rol' => $Logued['DescripcionRol']);
+            $_SESSION['UsuarioLogueado'] = array('Nombre' => $Nombre, 'Correo' => $Logued['Correo'], 'Rol' => $Logued['DescripcionRol'], 'ID' => $Logued['PK_IDUsuario']);
             echo \json_encode($Respuesta);
         } else {
             echo \json_encode(array('Codigo' => 3, 'Mensaje' => 'Error, Correo o Contraseña Incorrectos'));

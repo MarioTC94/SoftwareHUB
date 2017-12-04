@@ -120,7 +120,6 @@ SELECT * FROM Usuario;*/
 ) ENGINE=INNODB;
 
 
-
                 CREATE TABLE TipoIncidente
                 (
                     PK_IDTipoIncidente INT

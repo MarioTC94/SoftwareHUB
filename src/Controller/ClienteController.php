@@ -6,6 +6,8 @@ use src\Model\Domain\Usuario;
 use src\Model\DAO\SoftwareDAO;
 use src\Model\DAO\ProveedorDAO;
 use src\Model\DAO\TipoincidenteDAO;
+use src\Model\Domain\Incidente;
+use src\Model\DAO\IncidenteDAO;
 
 class ClienteController extends BaseController
 {
@@ -42,6 +44,35 @@ class ClienteController extends BaseController
                   }
             } else
                   parent::toView('Home', 'Index');
+      }
+
+      public function AddIncident()
+      {
+
+            if (!isset($_POST["DatosIncidente"])) {
+                  parent::toView('Error', 'PageNotFound');
+            }
+
+            \session_start();
+
+            $DataIncidente = \json_decode($_POST["DatosIncidente"], true);
+
+            $oIncidenteDAO = new IncidenteDAO();
+            $oIncidente = new Incidente();
+
+            $oIncidente->setActivo(1);
+            $oIncidente->setNombreIncidente($DataIncidente["NombreIncidente"]);
+            $oIncidente->setTipoIncidente($DataIncidente["TipoIncidente"]);
+            $oIncidente->setDescripcionIncidente( ($DataIncidente["DescripcionIncidente"]));
+
+
+            $oSoftware->setIDProveedor($_SESSION['UsuarioLogueado']['ID']);
+
+            if ($oSoftwareDAO->Add($oSoftware)) {
+                  echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Exito, Software Creado'));
+            } else {
+                  echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar Software'));
+            }
       }
 }
 ?>
