@@ -43,13 +43,15 @@ class HomeController extends BaseController
         $oUsuario->setFechaRegistro(\date('Y-m-d H:i:s'));
         $oUsuario->setCorreo($DataRegister["Correo"]);
         $oUsuario->setSalt(\mcrypt_create_iv(32));
-        $oUsuario->setContrasena(\hash('sha256', $DataRegister['Contrasena'] . $oUsuario->getSalt()));
+        $oUsuario->setContrasena(\hex2bin(\hash('sha256', $DataRegister['Contrasena'] . $oUsuario->getSalt())));
+
 
         if ($oUsuarioDao->ExistsCorreo($oUsuario)) {
             $Respuesta = array('Codigo' => 3, 'Mensaje' => 'Error, El Usuario ya esta registrado');
             echo \json_encode($Respuesta);
             exit();
         }
+
 
         if (!$oUsuarioDao->Add($oUsuario)) {
             $Respuesta = array('Codigo' => 3, 'Mensaje' => 'Error, No se pudo insertar el Usuario');
@@ -150,7 +152,8 @@ class HomeController extends BaseController
         }
 
         $Salt = $oUsuarioDAO->SelectSaltByPrimaryKey($oUsuario);
-        $oUsuario->setContrasena(\hash('sha256', $DataLogin['Contrasena'] . $Salt));
+        $oUsuario->setContrasena(\hex2bin(\hash('sha256', $DataLogin['Contrasena'] . $Salt)));
+
         $Logued = $oUsuarioDAO->Login($oUsuario);
 
         if (Count($Logued) <> 0) {
@@ -161,7 +164,7 @@ class HomeController extends BaseController
                     $oCliente = new Cliente();
                     $oCliente->setPK_IDCliente($Logued['PK_IDUsuario']);
                     $oCliente = $oClienteDAO->SelectByPrimaryKey($oCliente);
-                    $Nombre = $oCliente['PK_IDCliente'];
+                    $Nombre = $oCliente['Nombre'];
                     break;
                 case 'Proveedor':
                     $oProveedorDAO = new ProveedorDAO();

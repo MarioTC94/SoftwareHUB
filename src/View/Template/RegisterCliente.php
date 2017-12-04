@@ -22,7 +22,7 @@
                                 <input type="date" name="FechaNacimiento" class="form-control" id="txtFechaNac"/>
                             </div>
                         </div>
-                            <div class="form-group row">
+                        <div class="form-group row">
                             <div class="col-sm-6">
                             <input type="text" name="NombreUsuario" class="form-control" id="txtNombreUsuario"  placeholder="Nombre Usuario.."/>
                                 </div>
@@ -47,7 +47,6 @@
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary" id="btnSubmitRegister" form="FormRegisterCliente" >¡Registrar Cliente!</button>                 
           </div>
-       
       </div>
     </div>
   </div>
