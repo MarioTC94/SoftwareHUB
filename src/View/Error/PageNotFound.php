@@ -53,24 +53,7 @@
         <h2>Error404 <span>Página no encontrada</span></h2>
         </div>
     </div>
-    <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 copy">
-                        <span>SoftwareHUB - COPYRIGHT &#169 <?= date("Y"); ?> All Rights Reserved </span>
-                        <h3>Contacto</h3>
-                        <p>Correo electrónico: admin@SoftwareHUB.com</p>
-                        <p>Teléfono: 2348-5784</p>
-                    </div>
-                    <div class="col-md-6 text-right social">
-                        <p>Búscanos en: </p>
-                        <a href="#" class="facebook"><span class="icon-facebook"></span></a>
-                        <a href="#" class="twitter"><span class="icon-twitter"></span></a>
-                        <a href="#" class="instagram"><span class="icon-instagram"></span></a>
-                    </div>
-                </div>  
-            </div>
-        </footer>   
+    <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
         <?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'scripts', 'preload']); ?>
     </body>
 </html>

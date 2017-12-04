@@ -45,6 +45,8 @@
       </div>
  </div>
       </div>
-   </body>
+
+   <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
    <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
-   </html>
+   </body>
+</html>

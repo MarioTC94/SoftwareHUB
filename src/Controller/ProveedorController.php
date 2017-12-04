@@ -11,6 +11,21 @@ use src\Model\DAO\IncidenteDAO;
 
 class ProveedorController extends BaseController
 {
+
+      public function validate() //Validate logued user before load the page;
+      {
+            \session_start();
+            if (isset($_SESSION['UsuarioLogueado'])) {
+                  if ($_SESSION['UsuarioLogueado']['Rol'] == 'Proveedor') {
+                        return true;
+                  } else {
+                        parent::toView('Cliente', 'Index');
+                        exit();
+                  }
+            } else
+                  parent::toView('Home', 'Index');
+      }
+
       public function Index()
       {
             self::validate();;
@@ -124,20 +139,6 @@ class ProveedorController extends BaseController
             \session_start();
             \session_destroy();
             parent::toView("Home", "Index");
-      }
-
-      public function validate()
-      {
-            \session_start();
-            if (isset($_SESSION['UsuarioLogueado'])) {
-                  if ($_SESSION['UsuarioLogueado']['Rol'] == 'Proveedor') {
-                        return true;
-                  } else {
-                        parent::toView('Cliente', 'Index');
-                        exit();
-                  }
-            } else
-                  parent::toView('Home', 'Index');
       }
 }
 ?>

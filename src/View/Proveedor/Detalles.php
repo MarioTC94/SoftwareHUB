@@ -193,7 +193,7 @@
          </div>
       </div>
    </div>
-
+   <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
+   <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
 </body>
-<?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
 </html>
