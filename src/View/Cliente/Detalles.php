@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<?php include_once(HTML_DIR . 'Template/CrearIncidentes.php') ?>
    <header>
       <div class="row">
          <?php include_once(HTML_DIR . 'Template/navClientes.php') ?>

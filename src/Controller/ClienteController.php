@@ -19,7 +19,7 @@ class ClienteController extends BaseController
             $oTipoIncidente = new TipoincidenteDAO();
 
             $model['Software'] = $oSoftwareDAO->SelectAll();
-            //$model['TipoIncidente'] = $oTipoIncidente->SelectAll();
+            $model['TipoIncidente'] = $oTipoIncidente->SelectAll();
 
             parent::View($model);
 
@@ -75,10 +75,21 @@ class ClienteController extends BaseController
             }
       }
 
-      public function Detalles()
+      public function Detalles($IDIncidente = null)
       {
+            if ($IDIncidente == null) {
+                  parent::toView('Cliente', '');
+            }
+
             self::validate();
-            parent::View();
+            $model = array();
+            $oSoftwareDAO = new SoftwareDAO();
+            $oTipoIncidente = new TipoincidenteDAO();
+
+            $model['Software'] = $oSoftwareDAO->SelectAll();
+            $model['TipoIncidente'] = $oTipoIncidente->SelectAll();
+
+            parent::View($model);
       }
 }
 ?>
