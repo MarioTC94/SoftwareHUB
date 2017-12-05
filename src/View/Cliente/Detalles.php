@@ -182,12 +182,13 @@
                         <!-- /.panel-body -->
                         <div class="panel-footer">
                             <div class="input-group">
-                                <input class="form-control input-sm" id="btn-input" type="text" placeholder="Escribe tu mensaje aquí">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary btn-sm" id="btn-chat">
-                                        Enviar
-                                    </button>
-                                </span>
+                                <form >
+                                    <input type="hidden" name="IDIncidente" value="<?= $model['Incidente']['PK_IDIncidente'] ?>">
+                                    <input class="form-control input-sm" name="Comentario" id="btn-input" type="text" placeholder="Escribe tu mensaje aquí">
+                                    <span class="input-group-btn">
+                                        <input  class="btn btn-primary btn-sm" type="submit" id="btn-chat" value="Enviar"/>
+                                    </span>
+                                </form>
                             </div>
                         </div>
                         <!-- /.panel-footer -->
