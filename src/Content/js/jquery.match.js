@@ -391,3 +391,7 @@
 $(function () {
    $('.box').matchHeight();
 });
+
+$(function () {
+   $('.panel-footer').matchHeight();
+});

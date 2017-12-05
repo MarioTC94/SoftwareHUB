@@ -14,7 +14,7 @@ class ChatController extends BaseController
          \json_encode(array('Codigo' => 3, 'Mensaje' => 'Lo sentimos no se pudo completar su solicitud'));
       }
 
-      self::validate();
+      \session_start();
 
       $DataChat = \json_decode($_POST["DatosChat"], true);
       $Comentarios = new Comentarios();
@@ -26,8 +26,8 @@ class ChatController extends BaseController
       $Comentarios->setUsuario($_SESSION["UsuarioLogueado"]["ID"]);
       $Comentarios->setIncidente($DataChat['IDIncidente']);
 
-      if ($oComentarios->Add($Comentarios)) {
-         echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Comentario insertado incorrectamente', $Comentarios));
+      if ($oComentariosDAO->Add($Comentarios)) {
+         echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Comentario insertado incorrectamente', 'Comentario' => $Comentarios->getDescripcionComentario(), 'Nombre' => $_SESSION['UsuarioLogueado']['Nombre']));
       } else {
          echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar el comentario'));
       }

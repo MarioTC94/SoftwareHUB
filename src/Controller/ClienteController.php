@@ -8,6 +8,7 @@ use src\Model\DAO\ProveedorDAO;
 use src\Model\DAO\TipoincidenteDAO;
 use src\Model\Domain\Incidente;
 use src\Model\DAO\IncidenteDAO;
+use src\Model\DAO\ComentariosDAO;
 use lib\Helper\MySQLHelper;
 use lib\Route\Url;
 
@@ -167,7 +168,7 @@ class ClienteController extends BaseController
             $model = self::getData();
 
             $oIncidenteDAO = new IncidenteDAO();
-
+            $oComentarioDAO = new ComentariosDAO();
 
             $model['Incidente'] = $oIncidenteDAO->SelectAllInfoByPrimaryKey($IDIncidente);
 
@@ -179,8 +180,57 @@ class ClienteController extends BaseController
                   parent::toView('Error', 'PageNotFound');
             }
 
+            $model['Comentarios'] = $oComentarioDAO->SelectAllByIncident($IDIncidente);
+
+            for ($i = 0; $i < count($model['Comentarios']); $i++) {
+                  $model['Comentarios'][$i]['FechaComentario'] = self::time_ago($model['Comentarios'][$i]['FechaComentario']);
+
+                  if ($model['Comentarios'][$i]['Usuario'] == $_SESSION['UsuarioLogueado']['ID']) {
+                        $model['Comentarios'][$i]['Posicion'] = 'right';
+                        $model['Comentarios'][$i]['PosicionTiempo'] = 'left';
+                  } else {
+                        $model['Comentarios'][$i]['Posicion'] = 'left';
+                        $model['Comentarios'][$i]['PosicionTiempo'] = 'right';
+                  }
+            }
+
 
             parent::View($model);
+      }
+
+      private function time_ago($date)
+      {
+            if (empty($date)) {
+                  return "No date provided";
+            }
+            $periods = array("segundo", "minuto", "hora", "dia", "semana", "mes", "año", "decada");
+            $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
+            $now = time();
+            $unix_date = strtotime($date);
+        // check validity of date
+            if (empty($unix_date)) {
+                  return "Bad date";
+            }
+        // is it future date or past date
+            if ($now > $unix_date) {
+                  $difference = $now - $unix_date;
+                  $tense = "atrás";
+            } else {
+                  $difference = $unix_date - $now;
+                  $tense = "from now";
+            }
+            for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+                  $difference /= $lengths[$j];
+            }
+            $difference = round($difference);
+            if ($difference != 1) {
+                  if ($periods[$j] == "mes") {
+                        $periods[$j] .= "es";
+                  } else {
+                        $periods[$j] .= "s";
+                  }
+            }
+            return "$difference $periods[$j] {$tense}";
       }
 
       public function LogOut()

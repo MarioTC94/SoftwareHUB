@@ -303,27 +303,48 @@ $(document).ready(function () {
             }
         });
         if (errors > 0) {
-            $('#FormChat').html("");
-            $('#FormChat').append('<div class="alert alert-danger"><strong>Error! </strong>Campos vacíos</div>');
-            return false;
+            $('#FormChat').append('<div id="mensajeErrorForm" style="display: none" class="alert alert-danger"><strong>Error! </strong>Campos vacíos</div>');
+            $('#mensajeErrorForm').slideDown().delay(3000).slideUp(function () {
+                return false;
+            });
+
         }
 
-        var Data = JSON.stringify(getFormData($('#FormRegisterProveedor')));
+        var Data = JSON.stringify(getFormData($('#FormChat')));
         $.ajax({
-            url: '/SoftwareHUB/Home/RegistroProveedor/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            url: '/SoftwareHUB/Chat/Comment', //Metodo del controlador de Asphyo donde van a llegar los datos
             type: 'POST',
             data: {
-                DatosRegistro: Data
+                DatosChat: Data
             },
             dataType: 'json',
             success: function (Respuesta) {
                 switch (Respuesta.Codigo) {
                     case 1:
-                        window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
+                        var htmlComment = `<li class="right clearfix">
+                                            <span class="chat-img pull-right">
+                                                <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/FA6F57/fff">
+                                            </span>
+                                            <div class="chat-body clearfix">
+                                                <div class="header">
+                                                    <small class=" text-muted">
+                                                        <i class="fa fa-clock-o fa-fw"></i> Hace un momento
+                                                    </small>
+                                                    <strong class="pull-right primary-font">`+ Respuesta.Nombre + `</strong>
+                                                </div>
+                                                <p>`+ Respuesta.Comentario + `</p>
+                                            </div>
+                                            </li>`;
+                        $('#ContainerChat').append(htmlComment);
+                        $('#btn-input').val("");
                         break;
                     default:
-                        $('#ErrorProveedor').html("");
-                        $('#ErrorProveedor').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        console.log(Respuesta);
+                        $('#FormChat').html("");
+                        $('#FormChat').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        setTimeout(function () {
+                            $('#FormChat').html("");
+                        }, 3000);
                         break;
                 }
             },

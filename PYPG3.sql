@@ -73,16 +73,6 @@ CREATE TABLE Software
 
 SELECT * FROM Software;
 
-SELECT 
-  a.PK_IDSoftware PK_IDSoftware
-  ,a.NombreSoftware NombreSoftware  
-  ,b.DescripcionTipoSoftware DescripcionTipoSoftware
-  ,COUNT(c.IDSoftware) CantIncidentes
-FROM Software a 
-LEFT JOIN Incidente c ON c.IDSoftware = a.PK_IDSoftware
-JOIN TipoSoftware b ON b.PK_IDTipoSoftware = a.TipoSoftware 
-GROUP BY a.PK_IDSoftware
-Where IDProveedor = 1
 
 CREATE TABLE TipoIncidente
 (
@@ -130,7 +120,7 @@ CREATE TABLE Comentarios
     Incidente INT NOT NULL,
     Usuario INT,
     Activo BIT NOT NULL DEFAULT 1,
-    FechaComentario DATE NOT NULL,
+    FechaComentario DATETIME NOT NULL,
     CONSTRAINT FK_Incidente_Comentarios FOREIGN KEY(Incidente) REFERENCES Incidente(PK_IDIncidente) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_Usuario_Comentarios FOREIGN KEY(Usuario) REFERENCES Usuario (PK_IDUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT PK_IDComentarios PRIMARY KEY (PK_IDComentarios)

@@ -33,7 +33,7 @@
                      <div class="panel-heading">
                         <div class="row">
                            <div class="col-xs-3">
-                              <i class="fa fa-cutlery fa-5x"></i>
+                              <i class="fa fa-code  fa-5x"></i>
                            </div>
                            <div class="col-xs-9 text-right">
                            </div>
@@ -70,7 +70,7 @@
                      <div class="panel-heading">
                         <div class="row">
                            <div class="col-xs-3">
-                              <i class="fa fa-shopping-cart fa-5x"></i>
+                              <i class="fa fa-gear fa-5x"></i>
                            </div>
                            <div class="col-xs-9 text-right">
                            </div>
@@ -108,86 +108,36 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body" id=panelcomentario>
-                         <!--  <ul class="chat">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/55C1E7/fff">
-                                    </span>
-
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                                            </small>
+                           <ul class="chat" id="ContainerChat">
+                            <?php foreach ($model['Comentarios'] as $value) { ?>
+                                    <li class="<?= $value['Posicion'] ?> clearfix">
+                                        <span class="chat-img pull-<?= $value['Posicion'] ?>">
+                                        <?= $Html::img("user.png", "User Avatar", ["class" => ["img-circle"]]); ?>
+                                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <small class="pull-<?= $value['PosicionTiempo'] ?> text-muted">
+                                                    <i class="fa fa-clock-o fa-fw"></i><?= $value['FechaComentario'] ?>
+                                                </small>
+                                                <strong class="pull-<?= $value['Posicion'] ?> primary-font"><?= $value['Nombre'] ?></strong>
+                                            </div>
+                                            <hr>
+                                            <p><?= $value['DescripcionComentario'] ?></p>
                                         </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/FA6F57/fff">
-                                    </span>
-
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 13 mins ago
-                                            </small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/55C1E7/fff">
-                                    </span>
-
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 14 mins ago
-                                            </small>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/FA6F57/fff">
-                                    </span>
-
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 15 mins ago
-                                            </small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>-->
+                                    </li>
+                            <?php 
+                        } ?>
+                            </ul>
                         </div>
                         <!-- /.panel-body -->
                         <div class="panel-footer">
                             <div class="input-group">
                                 <form id="FormChat">
                                     <input type="hidden" name="IDIncidente" value="<?= $model['Incidente']['PK_IDIncidente'] ?>">
-                                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                    <input id="btn-input" type="text" name="Comentario" class="form-control input-sm" placeholder="Escriba su mensaje aquí...">
                                 </form>
                                     <span class="input-group-btn">
-                                        <button type="submit" form="#FormChat" class="btn btn-primary btn-sm" id="btn-chat">
+                                        <button type="submit" form="FormChat" class="btn btn-primary btn-sm" id="btn-chat">
                                             Send
                                         </button>
                                     </span>
@@ -199,6 +149,6 @@
    </div>
     </div>
     <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
-   <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
+   <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'jquery.match', 'preload']); ?>
 </body>
 </html>
