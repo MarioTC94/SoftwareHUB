@@ -88,8 +88,9 @@ namespace src\Model\DAO {
 		{
 			$STMT = parent::PREPARE('SELECT 
   												a.PK_IDSoftware PK_IDSoftware
-												,a.NombreSoftware NombreSoftware  
-												,a.IDProveedor
+												,a.NombreSoftware NombreSoftware
+												,a.DescripcionSoftware DescripcionSoftware
+												,a.IDProveedor IDProveedor
 												,b.DescripcionTipoSoftware DescripcionTipoSoftware
 												,COUNT(c.IDSoftware) CantIncidentes
 											FROM Software a 

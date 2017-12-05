@@ -6,7 +6,7 @@ $(document).ready(function () {
             $('.preload').css('display', 'none');
         });
     });
-    
+
     var marginDif = $('nav').height()
     $('.content').css({
         'margin-top': marginDif

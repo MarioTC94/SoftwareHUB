@@ -117,7 +117,7 @@ class ProveedorController extends BaseController
             $oSoftwareDAO = new SoftwareDAO();
 
             $model['TipoSoftware'] = $oTipoSoftwareDAO->SelectAll();
-            $mode['Software'] = $oSoftwareDAO->SelectAllByProvider($_SESSION['UsuarioLogueado']['ID']);
+            $model['Software'] = $oSoftwareDAO->SelectAllByProvider($_SESSION['UsuarioLogueado']['ID']);
 
             parent::View($model);
       }
