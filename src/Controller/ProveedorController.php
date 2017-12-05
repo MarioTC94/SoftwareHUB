@@ -109,7 +109,20 @@ class ProveedorController extends BaseController
             parent::View($model);
       }
 
-      public function AddSoftware()
+      public function Software()
+      {
+            self::validate();;
+            $model = array();
+            $oTipoSoftwareDAO = new TiposoftwareDAO();
+            $oSoftwareDAO = new SoftwareDAO();
+
+            $model['TipoSoftware'] = $oTipoSoftwareDAO->SelectAll();
+            $mode['Software'] = $oSoftwareDAO->SelectAllByProvider($_SESSION['UsuarioLogueado']['ID']);
+
+            parent::View($model);
+      }
+
+      public function AddSoftware() //Ajax Function
       {
             if (!isset($_POST["DatosSoftware"])) {
                   parent::toView('Error', 'PageNotFound');
@@ -134,7 +147,7 @@ class ProveedorController extends BaseController
 
       }
 
-      public function LogOut()
+      public function LogOut() //Logout function
       {
             \session_start();
             \session_destroy();

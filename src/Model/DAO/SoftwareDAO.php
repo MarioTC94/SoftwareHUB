@@ -83,9 +83,18 @@ namespace src\Model\DAO {
 			return parent::SELECT($STMT);
 		}
 
+
 		public function SelectAllByProvider($IDProveedor)
 		{
-			$STMT = parent::PREPARE('SELECT PK_IDSoftware, NombreSoftware  FROM Software Where IDProveedor = ?;');
+			$STMT = parent::PREPARE('SELECT 
+												a.PK_IDSoftware PK_IDSoftware
+												,a.NombreSoftware NombreSoftware  
+												,b.DescripcionTipoSoftware DescripcionTipoSoftware
+												,COUNT(c.IDSoftware) CantIncidentes
+											FROM Software a 
+											JOIN TipoSoftware b ON b.PK_IDTipoSoftware = a.TipoSoftware 
+											LEFT JOIN Incidente c ON c.IDSoftware = a.PK_IDSoftware
+											Where IDProveedor = ?;');
 
 			$Params = parent::TypeParam($IDProveedor);
 
