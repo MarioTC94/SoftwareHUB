@@ -180,15 +180,18 @@
                         </div>
                         <!-- /.panel-body -->
                         <div class="panel-footer">
-                            <div class="input-group">
-                                <input class="form-control input-sm" id="btn-input" type="text" placeholder="Escribe tu mensaje aquí">
+                        <div class="input-group">
+                            <form id="FormChat">
+                                <input type="hidden" name="IDIncidente" value="<?= $model['Incidente']['PK_IDIncidente'] ?>">
+                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                            </form>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary btn-sm" id="btn-chat">
-                                        Enviar
+                                    <button type="submit" form="#FormChat" class="btn btn-primary btn-sm" id="btn-chat">
+                                        Send
                                     </button>
                                 </span>
-                            </div>
                         </div>
+                    </div>
                         <!-- /.panel-footer -->
                     </div>
          </div>
