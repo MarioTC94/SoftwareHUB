@@ -189,12 +189,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-
-
-
-
     //Ajax para insertar Incidente
     $('#CreateIncidentForm').submit(function (e) {
         e.preventDefault();
@@ -296,7 +290,48 @@ $(document).ready(function () {
         });
     });
 
+    $('#FormChat').submit(function (e) {
+        e.preventDefault();
 
+        var errors = 0;
+        $("#FormChat :input").map(function () {
+            if (!$(this).val()) {
+                $(this).parent().addClass('has-danger');
+                errors++;
+            } else if ($(this).val()) {
+                $(this).parent().removeClass('has-danger');
+            }
+        });
+        if (errors > 0) {
+            $('#FormChat').html("");
+            $('#FormChat').append('<div class="alert alert-danger"><strong>Error! </strong>Campos vacíos</div>');
+            return false;
+        }
+
+        var Data = JSON.stringify(getFormData($('#FormRegisterProveedor')));
+        $.ajax({
+            url: '/SoftwareHUB/Home/RegistroProveedor/', //Metodo del controlador de Asphyo donde van a llegar los datos
+            type: 'POST',
+            data: {
+                DatosRegistro: Data
+            },
+            dataType: 'json',
+            success: function (Respuesta) {
+                switch (Respuesta.Codigo) {
+                    case 1:
+                        window.location.href = "/SoftwareHUB/" + Respuesta.Rol;
+                        break;
+                    default:
+                        $('#ErrorProveedor').html("");
+                        $('#ErrorProveedor').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        break;
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
 
     //Helper para ordenar los datos
     function getFormData($form) {
