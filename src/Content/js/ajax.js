@@ -303,11 +303,15 @@ $(document).ready(function () {
             }
         });
         if (errors > 0) {
-            $('#FormChat').append('<div id="mensajeErrorForm" style="display: none" class="alert alert-danger"><strong>Error! </strong>Campos vacíos</div>');
-            $('#mensajeErrorForm').slideDown().delay(3000).slideUp(function () {
-                return false;
+            $('#FormChat').append('<div id="mensajeErrorForm" style="height: 0; text-aling: center" class="alert alert-danger"><strong>Error! </strong>Comentario vacío</div>');
+            $('#mensajeErrorForm').animate({
+                'height': '50px'
+            }, 750).delay(3000).animate({
+                'height': '0'
+            }, 750, function () {
+                $(this).remove();
             });
-
+            return false;
         }
 
         var Data = JSON.stringify(getFormData($('#FormChat')));
