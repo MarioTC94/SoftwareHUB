@@ -14,9 +14,9 @@ namespace src\Model\DAO {
 		//Add a Incidente
 		public function Add(Incidente $oIncidente)
 		{
-			$STMT = parent::PREPARE('INSERT INTO Incidente(NombreIncidente, DescripcionIncidente, EstadoIncidente, TipoIncidente, Cliente, Proveedor, Activo, IDSoftware) VALUES (?, ?, ?, ?, ?, ?, ?, ?);');
+			$STMT = parent::PREPARE('INSERT INTO Incidente(NombreIncidente, DescripcionIncidente, EstadoIncidente, TipoIncidente, Cliente, Proveedor, IDSoftware, FechaIncidente, Activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);');
 
-			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getIDSoftware());
+			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getIDSoftware()) . parent::TypeParam($oIncidente->getFechaIncidente()) . parent::TypeParam($oIncidente->getActivo());
 
 			$NombreIncidente = $oIncidente->getNombreIncidente();
 			$DescripcionIncidente = $oIncidente->getDescripcionIncidente();
@@ -24,10 +24,11 @@ namespace src\Model\DAO {
 			$TipoIncidente = $oIncidente->getTipoIncidente();
 			$Cliente = $oIncidente->getCliente();
 			$Proveedor = $oIncidente->getProveedor();
-			$Activo = $oIncidente->getActivo();
 			$IDSoftware = $oIncidente->getIDSoftware();
+			$FechaIncidente = $oIncidente->getFechaIncidente();
+			$Activo = $oIncidente->getActivo();
 
-			$STMT->bind_param($Params, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $Activo, $IDSoftware);
+			$STMT->bind_param($Params, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $IDSoftware, $FechaIncidente, $Activo);
 
 			return parent::CMD($STMT);
 		}
@@ -35,9 +36,9 @@ namespace src\Model\DAO {
 		//Update a Incidente
 		public function Update(Incidente $oIncidente)
 		{
-			$STMT = parent::PREPARE('UPDATE Incidente SET NombreIncidente = ?, DescripcionIncidente = ?, EstadoIncidente = ?, TipoIncidente = ?, Cliente = ?, Proveedor = ?, Activo = ?, IDSoftware = ? WHERE PK_IDIncidente = ?;');
+			$STMT = parent::PREPARE('UPDATE Incidente SET NombreIncidente = ?, DescripcionIncidente = ?, EstadoIncidente = ?, TipoIncidente = ?, Cliente = ?, Proveedor = ?, IDSoftware = ?, FechaIncidente = ?, Activo = ? WHERE PK_IDIncidente = ?;');
 
-			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getIDSoftware()) . parent::TypeParam($oIncidente->getPK_IDIncidente());
+			$Params = parent::TypeParam($oIncidente->getNombreIncidente()) . parent::TypeParam($oIncidente->getDescripcionIncidente()) . parent::TypeParam($oIncidente->getEstadoIncidente()) . parent::TypeParam($oIncidente->getTipoIncidente()) . parent::TypeParam($oIncidente->getCliente()) . parent::TypeParam($oIncidente->getProveedor()) . parent::TypeParam($oIncidente->getIDSoftware()) . parent::TypeParam($oIncidente->getFechaIncidente()) . parent::TypeParam($oIncidente->getActivo()) . parent::TypeParam($oIncidente->getPK_IDIncidente());
 
 			$NombreIncidente = $oIncidente->getNombreIncidente();
 			$DescripcionIncidente = $oIncidente->getDescripcionIncidente();
@@ -45,11 +46,12 @@ namespace src\Model\DAO {
 			$TipoIncidente = $oIncidente->getTipoIncidente();
 			$Cliente = $oIncidente->getCliente();
 			$Proveedor = $oIncidente->getProveedor();
-			$Activo = $oIncidente->getActivo();
 			$IDSoftware = $oIncidente->getIDSoftware();
+			$FechaIncidente = $oIncidente->getFechaIncidente();
+			$Activo = $oIncidente->getActivo();
 			$PK_IDIncidente = $oIncidente->getPK_IDIncidente();
 
-			$STMT->bind_param($Params, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $Activo, $IDSoftware, $PK_IDIncidente);
+			$STMT->bind_param($Params, $NombreIncidente, $DescripcionIncidente, $EstadoIncidente, $TipoIncidente, $Cliente, $Proveedor, $IDSoftware, $FechaIncidente, $Activo, $PK_IDIncidente);
 
 			return parent::CMD($STMT);
 		}
@@ -103,7 +105,6 @@ namespace src\Model\DAO {
 			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 
-		//Select By Cliente
 		public function SelectAllByCliente($IDCliente)
 		{
 
@@ -112,6 +113,7 @@ namespace src\Model\DAO {
 							a.Proveedor Proveedor,
 							a.PK_IDIncidente PK_IDIncidente
 							,a.NombreIncidente NombreIncidente
+							,a.FechaIncidente FechaIncidente
 							,a.DescripcionIncidente DescripcionIncidente
 							,b.DescripcionTipoIncidente DescripcionTipoIncidente
 							,c.DescripcionEstadoIncidente DescripcionEstadoIncidente
@@ -124,7 +126,8 @@ namespace src\Model\DAO {
 						JOIN EstadoIncidente c ON c.PK_IDEstadoIncidente = a.EstadoIncidente 
 						JOIN Software d ON d.PK_IDSoftware = a.IDSoftware 
 						JOIN Proveedor e ON e.PK_IDProveedor = a.Proveedor 
-						WHERE a.Cliente  = ?;';
+						WHERE a.Cliente  = ?
+						ORDER BY a.FechaIncidente DESC';
 
 			$STMT = parent::PREPARE($Query);
 			$STMT->bind_param('i', $IDCliente);
@@ -138,6 +141,7 @@ namespace src\Model\DAO {
 							a.PK_IDIncidente PK_IDIncidente
 							,a.NombreIncidente NombreIncidente
 							,a.DescripcionIncidente DescripcionIncidente
+							,a.FechaIncidente FechaIncidente
 							,b.DescripcionTipoIncidente DescripcionTipoIncidente
 							,c.DescripcionEstadoIncidente DescripcionEstadoIncidente
 							,d.NombreSoftware NombreSoftware
@@ -149,7 +153,8 @@ namespace src\Model\DAO {
 						JOIN EstadoIncidente c ON c.PK_IDEstadoIncidente = a.EstadoIncidente 
 						JOIN Software d ON d.PK_IDSoftware = a.IDSoftware 
 						JOIN Cliente e ON e.PK_IDCliente = a.Cliente 
-						WHERE a.Proveedor  = ?;';
+						WHERE a.Proveedor  = ?
+						ORDER BY a.FechaIncidente DESC';
 
 			$STMT = parent::PREPARE($Query);
 			$STMT->bind_param('i', $IDProveedor);
@@ -163,6 +168,7 @@ namespace src\Model\DAO {
 							a.PK_IDIncidente PK_IDIncidente
 							,a.NombreIncidente NombreIncidente
 							,a.DescripcionIncidente DescripcionIncidente
+							,a.FechaIncidente FechaIncidente
 							,b.DescripcionTipoIncidente DescripcionTipoIncidente
 							,c.DescripcionEstadoIncidente DescripcionEstadoIncidente
 							,d.NombreSoftware NombreSoftware

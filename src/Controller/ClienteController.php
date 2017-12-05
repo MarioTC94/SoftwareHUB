@@ -102,6 +102,7 @@ class ClienteController extends BaseController
             $oIncidente->setDescripcionIncidente($DataIncidente["DescripcionIncidente"]);
             $oIncidente->setEstadoIncidente(1);
             $oIncidente->setCliente($_SESSION['UsuarioLogueado']['ID']);
+            $oIncidente->setFechaIncidente(\date('Y-m-d H:i:s'));
 
             if (!$oIncidenteDAO->Add($oIncidente)) {
                   echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al crear incidente'));
