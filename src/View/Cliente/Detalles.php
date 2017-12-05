@@ -182,16 +182,17 @@
                         <!-- /.panel-body -->
                         <div class="panel-footer">
                             <div class="input-group">
-                                <form >
+                                <form id="FormChat">
                                     <input type="hidden" name="IDIncidente" value="<?= $model['Incidente']['PK_IDIncidente'] ?>">
-                                    <input class="form-control input-sm" name="Comentario" id="btn-input" type="text" placeholder="Escribe tu mensaje aquí">
-                                    <span class="input-group-btn">
-                                        <input  class="btn btn-primary btn-sm" type="submit" id="btn-chat" value="Enviar"/>
-                                    </span>
+                                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
                                 </form>
+                                    <span class="input-group-btn">
+                                        <button type="submit" form="#FormChat" class="btn btn-primary btn-sm" id="btn-chat">
+                                            Send
+                                        </button>
+                                    </span>
                             </div>
                         </div>
-                        <!-- /.panel-footer -->
                     </div>
          </div>
       </div>
