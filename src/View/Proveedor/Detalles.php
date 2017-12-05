@@ -12,6 +12,7 @@
 </head>
 
 <body>
+   <div class="content-body">
    <header>
       <div class="row">
          <?php include_once(HTML_DIR . 'Template/navProveedor.php') ?>
@@ -195,5 +196,6 @@
    </div>
    <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
    <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
+   </div>
 </body>
 </html>

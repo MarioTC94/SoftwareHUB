@@ -87,14 +87,15 @@ namespace src\Model\DAO {
 		public function SelectAllByProvider($IDProveedor)
 		{
 			$STMT = parent::PREPARE('SELECT 
-												a.PK_IDSoftware PK_IDSoftware
+  												a.PK_IDSoftware PK_IDSoftware
 												,a.NombreSoftware NombreSoftware  
+												,a.IDProveedor
 												,b.DescripcionTipoSoftware DescripcionTipoSoftware
 												,COUNT(c.IDSoftware) CantIncidentes
 											FROM Software a 
-											JOIN TipoSoftware b ON b.PK_IDTipoSoftware = a.TipoSoftware 
 											LEFT JOIN Incidente c ON c.IDSoftware = a.PK_IDSoftware
-											Where IDProveedor = ?;');
+											INNER JOIN TipoSoftware b ON b.PK_IDTipoSoftware = a.TipoSoftware 
+											GROUP BY a.PK_IDSoftware HAVING a.IDProveedor = ?;');
 
 			$Params = parent::TypeParam($IDProveedor);
 

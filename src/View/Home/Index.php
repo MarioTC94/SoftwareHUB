@@ -10,7 +10,8 @@
 	<?= $Html::css(['bootstrap.min', 'bootstrap-social', 'font-awesome.min', 'main', 'preload']); ?>
 </head>
 <body>
-    <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
+
+   <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
     <?php include_once(HTML_DIR . 'Template/RegisterCliente.php'); ?>
     <?php include_once(HTML_DIR . 'Template/RegisterProveedor.php'); ?>
     <div class="preload">
@@ -57,8 +58,8 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-        <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
-        <?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'ajax', 'preload']); ?>
+</div>  
+   <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
+<?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'ajax', 'preload']); ?>
     </body>
 </html>

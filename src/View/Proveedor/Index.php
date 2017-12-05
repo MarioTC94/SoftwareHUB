@@ -10,7 +10,8 @@
       <?= $Html::css(['bootstrap.min', 'bootstrap-social', 'font-awesome.min', 'main', 'preload']); ?>
    </head>
    <body>
-            <?php include_once(HTML_DIR . 'Template/CrearSoftware.php') ?>
+           <div class="content-body">
+           <?php include_once(HTML_DIR . 'Template/CrearSoftware.php') ?>
    <header>
          <div class="row">
             <?php include_once(HTML_DIR . 'Template/navProveedor.php') ?>
@@ -46,5 +47,6 @@
       </div>
       <?php include_once(HTML_DIR . 'Template/footer.php'); ?>
       <?= $Html::script(['jquery.min', 'bootstrap.min', 'ajax', 'preload']); ?>
+           </div>
    </body>
    </html>

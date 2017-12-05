@@ -62,7 +62,7 @@ CREATE TABLE Software
 (
     PK_IDSoftware INT AUTO_INCREMENT,
     NombreSoftware VARCHAR(45) NOT NULL,
-    DescripcionSoftware VARCHAR(45) NOT NULL,
+    DescripcionSoftware VARCHAR(700) NOT NULL,
     Activo BIT NOT NULL DEFAULT 1,
     TipoSoftware INT NOT NULL,
     IDProveedor INT NOT NULL,
@@ -71,6 +71,18 @@ CREATE TABLE Software
 	CONSTRAINT FK_Software_Proveedor FOREIGN KEY(IDProveedor) REFERENCES Proveedor(PK_IDProveedor) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=INNODB;
 
+SELECT * FROM Software;
+
+SELECT 
+  a.PK_IDSoftware PK_IDSoftware
+  ,a.NombreSoftware NombreSoftware  
+  ,b.DescripcionTipoSoftware DescripcionTipoSoftware
+  ,COUNT(c.IDSoftware) CantIncidentes
+FROM Software a 
+LEFT JOIN Incidente c ON c.IDSoftware = a.PK_IDSoftware
+JOIN TipoSoftware b ON b.PK_IDTipoSoftware = a.TipoSoftware 
+GROUP BY a.PK_IDSoftware
+Where IDProveedor = 1
 
 CREATE TABLE TipoIncidente
 (
@@ -93,8 +105,8 @@ INSERT INTO EstadoIncidente(DescripcionEstadoIncidente) VALUES('Abierto'),('En P
 CREATE TABLE Incidente
 (
     PK_IDIncidente INT AUTO_INCREMENT,
-    NombreIncidente VARCHAR(45) NOT NULL,
-    DescripcionIncidente VARCHAR(500) NOT NULL,
+    NombreIncidente VARCHAR(100) NOT NULL,
+    DescripcionIncidente VARCHAR(700) NOT NULL,
     EstadoIncidente INT NOT NULL,
     TipoIncidente INT NOT NULL,
     Cliente INT NOT NULL,
@@ -110,10 +122,11 @@ CREATE TABLE Incidente
 	Activo BIT NOT NULL DEFAULT 1
 ) ENGINE=INNODB;
 
+
 CREATE TABLE Comentarios
 (
     PK_IDComentarios INT AUTO_INCREMENT,
-    DescripcionComentario VARCHAR(300) NOT NULL,
+    DescripcionComentario VARCHAR(1000) NOT NULL,
     Incidente INT NOT NULL,
     Usuario INT,
     Activo BIT NOT NULL DEFAULT 1,

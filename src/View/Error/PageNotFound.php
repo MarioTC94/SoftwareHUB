@@ -11,7 +11,8 @@
 </head>
 <body>
 
-    <?php
+   <div class="content-body">
+   <?php
     if (isset($_SESSION['UsuarioLogueado'])) {
         if ($_SESSION['UsuarioLogueado']['Rol'] == 'Cliente') {
             include_once(HTML_DIR . 'Template/CrearIncidentes.php');
@@ -53,7 +54,8 @@
         <h2>Error404 <span>Página no encontrada</span></h2>
         </div>
     </div>
-    <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
+   </div>
+   <?php include_once(HTML_DIR . 'Template/Login.php'); ?>
         <?= $Html::script(['jquery.min', 'bootstrap.min', 'indexEfects', 'scripts', 'preload']); ?>
     </body>
 </html>

@@ -2,6 +2,13 @@
     height: 100%;
 }
 
+.content-body{
+    min-height: 70%;
+    min-height: -webkit-calc(100% -285px);
+    min-height: -moz-calc(100% -285px);
+    min-height: calc(100% -285px);
+}
+
 .panel-body{
     color: #000;
 }
