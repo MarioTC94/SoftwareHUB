@@ -216,6 +216,7 @@ class ClienteController extends BaseController
             }
 
       }
+
       private function time_ago($date)
       {
             if (empty($date)) {

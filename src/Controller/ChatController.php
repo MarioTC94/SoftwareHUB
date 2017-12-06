@@ -4,6 +4,7 @@ namespace src\Controller;
 use lib\Controller\BaseController;
 use src\Model\Domain\Comentarios;
 use src\Model\DAO\ComentariosDAO;
+use lib\Helper\Html;
 
 class ChatController extends BaseController
 {
@@ -27,7 +28,10 @@ class ChatController extends BaseController
       $Comentarios->setIncidente($DataChat['IDIncidente']);
 
       if ($oComentariosDAO->Add($Comentarios)) {
-         echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Comentario insertado incorrectamente', 'Comentario' => $Comentarios->getDescripcionComentario(), 'Nombre' => $_SESSION['UsuarioLogueado']['Nombre']));
+
+         $img = Html::img("user.png", "User Avatar", ["class" => ["img-circle"]]);
+
+         echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Comentario insertado incorrectamente', 'Comentario' => $Comentarios->getDescripcionComentario(), 'Nombre' => $_SESSION['UsuarioLogueado']['Nombre'], 'Img' => $img));
       } else {
          echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar el comentario'));
       }

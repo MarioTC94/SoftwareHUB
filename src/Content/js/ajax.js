@@ -327,7 +327,7 @@ $(document).ready(function () {
                     case 1:
                         var htmlComment = `<li class="right clearfix">
                                             <span class="chat-img pull-right">
-                                                <img class="img-circle" alt="User Avatar" src="http://placehold.it/50/FA6F57/fff">
+                                               `+ Respuesta.Img + `
                                             </span>
                                             <div class="chat-body clearfix">
                                                 <div class="header">
