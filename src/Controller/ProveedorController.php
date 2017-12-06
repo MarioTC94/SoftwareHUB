@@ -9,6 +9,9 @@ use src\Model\DAO\SoftwareDAO;
 use src\Model\Domain\Software;
 use src\Model\DAO\IncidenteDAO;
 use src\Model\DAO\ComentariosDAO;
+use src\Model\DAO\TipoincidenteDAO;
+use src\Model\Domain\Estadoincidente;
+use src\Model\DAO\EstadoincidenteDAO;
 
 class ProveedorController extends BaseController
 {
@@ -94,8 +97,10 @@ class ProveedorController extends BaseController
 
             $oIncidenteDAO = new IncidenteDAO();
             $oComentarioDAO = new ComentariosDAO();
+            $oEstadoIncidente = new EstadoincidenteDAO();
 
             $model['Incidente'] = $oIncidenteDAO->SelectAllInfoByPrimaryKey($IDIncidente);
+            $model['TipoIncidente'] = $oEstadoIncidente->SelectAll();
 
             if (\count($model['Incidente']) == 0) {
                   parent::toView('Error', 'PageNotFound');
@@ -196,6 +201,28 @@ class ProveedorController extends BaseController
                   echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al insertar software'));
             }
 
+      }
+
+      public function ActualizarEstadoIncidente() //Actualizar incidente
+      {
+            if (!isset($_POST["DataIncident"])) {
+                  echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'Error al actualizar el incidente'));
+            }
+
+            self::validate();
+
+            $DataTipoIncidente = \json_decode($_POST["DataIncident"], true);
+
+            $IDIncidente = $DataTipoIncidente['IDIncidente'];
+            $IDTipoIncidente = $DataTipoIncidente['TipoIncidente'];
+
+            $oIncidenteDAO = new IncidenteDAO();
+
+            if ($oIncidenteDAO->UpdateTipoIncidente($IDIncidente, $IDTipoIncidente)) {
+                  echo \json_encode(array('Codigo' => 1, 'Mensaje' => 'Exito al actualizar'));
+            } else {
+                  echo \json_encode(array('Codigo' => 2, 'Mensaje' => 'error al actualizar'));
+            }
       }
 
       public function LogOut() //Logout function
