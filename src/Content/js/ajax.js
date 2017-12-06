@@ -344,11 +344,61 @@ $(document).ready(function () {
                         break;
                     default:
                         console.log(Respuesta);
-                        $('#FormChat').html("");
-                        $('#FormChat').append('<div class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
-                        setTimeout(function () {
-                            $('#FormChat').html("");
-                        }, 3000);
+                        $('#FormChat').append('<div id="mensajeErrorForm" style="height: 0; text-aling: center" class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#mensajeErrorForm').animate({
+                            'height': '50px'
+                        }, 750).delay(3000).animate({
+                            'height': '0'
+                        }, 750, function () {
+                            $(this).remove();
+                        });
+                        break;
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    });
+
+    $('#CBIDTipoIncidenteProveedor').on('change', function () {
+        $('#FormUpdateState').submit();
+    });
+
+
+    $('#FormUpdateState').submit(function (e) {
+        e.preventDefault();
+
+        var Data = JSON.stringify(getFormData($('#FormUpdateState')));
+        $.ajax({
+            url: '/SoftwareHUB/Proveedor/ActualizarEstadoIncidente', //Metodo del controlador de Asphyo donde van a llegar los datos
+            type: 'POST',
+            data: {
+                DataIncident: Data
+            },
+            dataType: 'json',
+            success: function (Respuesta) {
+                switch (Respuesta.Codigo) {
+                    case 1:
+                        $('#FormUpdateState').append('<div id="mensajeErrorForm" style="height: 0; text-aling: center" class="alert alert-success"><strong>Exito! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#mensajeErrorForm').animate({
+                            'height': '50px'
+                        }, 750).delay(3000).animate({
+                            'height': '0'
+                        }, 750, function () {
+                            $(this).remove();
+                        });
+                        break;
+                    default:
+                        console.log(Respuesta);
+                        $('#FormUpdateState').append('<div id="mensajeErrorForm" style="height: 0; text-aling: center" class="alert alert-danger"><strong>Error! </strong>' + Respuesta.Mensaje + '</div>');
+                        $('#mensajeErrorForm').animate({
+                            'height': '50px'
+                        }, 750).delay(3000).animate({
+                            'height': '0'
+                        }, 750, function () {
+                            $(this).remove();
+                        });
                         break;
                 }
             },

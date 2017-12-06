@@ -105,6 +105,13 @@ namespace src\Model\DAO {
 			return Count(parent::FirstOrDefault($STMT)) > 0;
 		}
 
+		public function UpdateTipoIncidente($IDIncidente, $IDTipoIncidente)
+		{
+			$STMT = parent::PREPARE('UPDATE Incidente SET EstadoIncidente = ? WHERE PK_IDIncidente = ?');
+			$STMT->bind_param('ii', $IDTipoIncidente, $IDIncidente);
+			return parent::CMD($STMT);
+		}
+
 		public function SelectAllByCliente($IDCliente)
 		{
 
