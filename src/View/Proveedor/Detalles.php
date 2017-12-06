@@ -123,7 +123,11 @@
                                     <select name="TipoIncidente" class="form-control" id="CBIDTipoIncidenteProveedor">
                                     <?php 
                                     foreach ($model['TipoIncidente'] as $value) {
-                                        echo '<option value="' . $value['PK_IDEstadoIncidente'] . '">' . $value['DescripcionEstadoIncidente'] . '</option>';
+                                        if ($model['Incidente']['DescripcionEstadoIncidente'] == $value['DescripcionEstadoIncidente']) {
+                                            echo '<option selected="selected" value="' . $value['PK_IDEstadoIncidente'] . '">' . $value['DescripcionEstadoIncidente'] . '</option>';
+                                        } else {
+                                            echo '<option value="' . $value['PK_IDEstadoIncidente'] . '">' . $value['DescripcionEstadoIncidente'] . '</option>';
+                                        }
                                     }
                                     ?>
                                     </select>
