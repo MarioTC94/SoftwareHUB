@@ -87,7 +87,7 @@
             </div>
             <div class="row">
             <div class="col-lg-12">
-                    <div class="panel panel-success">
+            <div class="panel panel-success">
                         <div class="panel-heading">
                            Descripción del Incidente
                         </div>
@@ -99,6 +99,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+            <div class="col-lg-12">
+                  <div class="panel panel-green">
+                        <div class="panel-heading">
+                           Documento del Incidente
+                        </div>
+                        <div class="panel-body">
+                           <form id="formDocumento">
+                               <div class="form-group row"> 
+                                   <div class="col-sm-8">
+                                   <input type="file" class="form-control" name="SubirDocumento">
+                                    </div>                       
+                                    <div class="col-sm-4">
+                                    <input type="submit" class="btn btn-success" id="btnGuardarDocumento" form="formdocumento" value="Guardar"/>
+                                    </div>
+                               </div>
+                           </form>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+            </div>
+         </div>
          </div>
          <div class="col-md-4">
          <div class="chat-panel panel panel-primary">

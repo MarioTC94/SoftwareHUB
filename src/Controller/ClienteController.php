@@ -11,6 +11,8 @@ use src\Model\DAO\IncidenteDAO;
 use src\Model\DAO\ComentariosDAO;
 use lib\Helper\MySQLHelper;
 use lib\Route\Url;
+use src\Model\Domain\Documentos;
+use src\Model\DAO\DocumentosDAO;
 
 class ClienteController extends BaseController
 {
@@ -198,6 +200,22 @@ class ClienteController extends BaseController
             parent::View($model);
       }
 
+      public function Documentos()
+      {
+            $DataDocumento = \json_decode($_POST["DatosDocumento"], true);
+
+            $Documento = new Documentos();
+            $DocumentoDAO = new DocumentosDAO();
+
+            $Documento->setActivo(1);
+            $Documento->setDescripcionDocumentos($DataDocumento[$_FILES["SubirDocumento"]["name"]]);
+            $Documento->setIncidente()
+
+                  if ($DocumentoDAO->Add($Documento)) {
+
+            }
+
+      }
       private function time_ago($date)
       {
             if (empty($date)) {
