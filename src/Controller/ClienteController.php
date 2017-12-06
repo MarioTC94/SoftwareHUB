@@ -209,11 +209,7 @@ class ClienteController extends BaseController
 
             $Documento->setActivo(1);
             $Documento->setDescripcionDocumentos($DataDocumento[$_FILES["SubirDocumento"]["name"]]);
-            $Documento->setIncidente()
 
-                  if ($DocumentoDAO->Add($Documento)) {
-
-            }
 
       }*/
 
