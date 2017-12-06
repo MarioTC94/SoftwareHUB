@@ -200,7 +200,7 @@ class ClienteController extends BaseController
             parent::View($model);
       }
 
-      public function Documentos()
+      /*public function Documentos()
       {
             $DataDocumento = \json_decode($_POST["DatosDocumento"], true);
 
@@ -211,7 +211,8 @@ class ClienteController extends BaseController
             $Documento->setDescripcionDocumentos($DataDocumento[$_FILES["SubirDocumento"]["name"]]);
 
 
-      }
+      }*/
+
       private function time_ago($date)
       {
             if (empty($date)) {
